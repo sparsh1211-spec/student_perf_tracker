@@ -12,9 +12,11 @@ const Login: React.FC<Props>=(props) => {
        
       
             <div className="font-extrabold">Login page
-            Don't have an account? <Link to="/auth/signup" className="text-blue-700 underline font-bold">Click here</Link> to Sign Up 
-             <div> <Link to="/dashboard" className="text-blue-700 underline font-bold">Go to Dashboard</Link></div>
+            Don't have an account? <Link to="/auth/signup" className="font-bold text-blue-700 underline">Click here</Link> to Sign Up 
+             <div> <Link to="/dashboard" className="font-bold text-blue-700 underline">Go to Dashboard</Link></div>
+             <div>LOGIN PAGEEEEEEEE</div>
             </div>
+            
             
             
     );
