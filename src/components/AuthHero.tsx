@@ -15,9 +15,9 @@ const AuthHero: React.FC<Props>=(props) => {
     }, []);
     return (
         <>
-          <div className="h-screen w-1/2 bg-black text-white">
+          <div className="w-1/2 h-screen text-white bg-black">
               <img src={logo} className="m-auto my-16" alt=""/>
-              <p className="ml-36 font-extrabold">PS: Gaming site nahi h bhai..chala jaa,  yahan kuch nhi milega</p>
+              <p className="font-extrabold ml-36">PS: Gaming site nahi h bhai..chala jaa,  yahan kuch nhi milega</p>
               </div>  
         </>
     );
