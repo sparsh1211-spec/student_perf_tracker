@@ -17,7 +17,7 @@ const AuthHero: React.FC<Props>=(props) => {
         <>
           <div className="w-1/2 h-screen text-white bg-black">
               <img src={logo} className="m-auto my-16" alt=""/>
-              <p className="font-extrabold ml-36">PS: Gaming site nahi h bhai..chala jaa,  yahan kuch nhi milega</p>
+             
               </div>  
         </>
     );
