@@ -6,6 +6,7 @@ import { FaUserCircle, FaSpinner } from 'react-icons/fa';
 import { RiLockPasswordLine } from 'react-icons/ri';
 import * as yup from "yup";
 
+
 interface Props {
 
 }
@@ -29,6 +30,13 @@ const Login: React.FC<Props> = (props) => {
     const [loading, setLoading] = useState(false);
     const history = useHistory();
 
+    // useEffect(() => {
+    //     console.log("component mounted");
+    //     return () => {
+    //         console.log("component unmounted");
+    //     }
+    // }, [])//return inside useEffect runs when the component is unmounted while the function inside useEffect runs when there is a change in dependency array
+
     let emailError = "";
     let passwordError = "";
 
@@ -36,7 +44,9 @@ const Login: React.FC<Props> = (props) => {
 
     const emailValidator=yup.string().required().email();
     const passwordValidator=yup.string().required().min(8);//for strings input
-    const negArr=yup.array().required().of(yup.number().negative());//for array of numbers
+    const negArr=yup.array().required().of(yup.number().negative());//for array of negative numbers
+    // const numberValidator=yup.number().positive();//for positive numbers
+    // const positiveNumberVaildator=yup.array().of(yup.number().positive());//for array of postive numbers
 
     
     const formValidator= yup.object().shape({
@@ -44,6 +54,32 @@ const Login: React.FC<Props> = (props) => {
         password:yup.string().required().min(8),
     })
 
+    try{
+        formValidator.validateSync(data);
+    }catch(e){
+        console.log(e);
+    }
+
+    
+
+    // const myData={
+    //     age:10,
+    //     firstName:"Sparsh",
+    //     lastName:"garg",
+    // };
+
+    // const myDataVaildator=yup.object().shape({
+    //     firstName:yup.string().required(),
+    //     lastName:yup.string().min(2),
+    //     age:yup.number().positive().required()
+    // });
+
+    // console.log("MY DATA VALIDATOR RESULTS:",myDataVaildator.isValidSync(myData));
+
+
+    //"validate" returns promise(we use this if the validator is async).
+    //"validateSync" returns whole data(iff true) in which the data is typecasted.
+    //"isValidSync" returns boolean value.
 
     
     console.log(negArr);
@@ -87,8 +123,7 @@ const Login: React.FC<Props> = (props) => {
     }
     return (
 
-        <>
-
+<>
            
             <form className="m-auto" onSubmit={(event) => {
                 event.preventDefault();
@@ -103,7 +138,7 @@ const Login: React.FC<Props> = (props) => {
                     history.push("/dashboard");
                 }, 5000);
             }}>
-                 <div className="mb-6 text-2xl font-semibold text-blue-600">Log In to <span className="font-extrabold">Devs</span></div>
+                 <div className="mb-6 text-2xl font-semibold text-blue-600">Log In to <span className="font-extrabold">DEVS</span></div>
                 
                 <div className="mb-12 font-bold">New here? <Link to="/auth/signup" className="text-indigo-600 underline hover:text-indigo-900">Create an account</Link></div>
                 <div className="flex flex-col space-y-10">
@@ -153,7 +188,7 @@ const Login: React.FC<Props> = (props) => {
                         else {
                             setPasswordtype(false);
                         }
-                    }} className="shadow-md" type="checkbox" /></div>
+                    }} className="shadow-md cursor-pointer" type="checkbox" /></div>
                 </div>
 
             </form>

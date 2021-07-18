@@ -9,8 +9,8 @@ interface Props{
 const Signup: React.FC<Props>=(props) => {
     return (
         <>
-            <div>Sign_up Page
-            Already have an account? <Link to="/auth/login" className="text-blue-700 underline font-bold">Click here</Link>
+            <div>
+            Already have an account? <Link to="/auth/login" className="font-bold text-blue-700 underline">Click here</Link>
             </div>
 
         </>

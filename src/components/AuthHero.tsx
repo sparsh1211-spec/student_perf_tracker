@@ -1,6 +1,6 @@
 
 import React, { useEffect } from "react";
-import logo from "./discord.png"
+import logo from "./AuthHero.webp"
 
 
 
@@ -16,7 +16,7 @@ const AuthHero: React.FC<Props>=(props) => {
     return (
         <>
           <div className="w-1/2 h-screen text-white bg-black">
-              <img src={logo} className="m-auto my-16" alt=""/>
+              <img src={logo} className="mx-auto my-44 h-96 w-96" alt=""/>
              
               </div>  
         </>
