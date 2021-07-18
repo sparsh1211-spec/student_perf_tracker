@@ -15,7 +15,7 @@ const AuthHero: React.FC<Props>=(props) => {
     }, []);
     return (
         <>
-          <div className="w-1/2 h-screen text-white bg-black">
+          <div className="w-1/2 h-screen text-white bg-black md:block lg:block sm:hidden ">
               <img src={logo} className="mx-auto my-44 h-96 w-96" alt=""/>
              
               </div>  

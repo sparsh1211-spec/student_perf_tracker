@@ -158,7 +158,7 @@ const Login: React.FC<Props> = (props) => {
 
 <>
            
-            <form className="mt-32 ml-36" onSubmit={handleSubmit}>
+            <form className="mt-32 lg:ml-36 sm:ml-12" onSubmit={handleSubmit}>
                  <div className="mb-6 text-5xl font-semibold text-blue-600">Log In to <span className="font-extrabold">DEVS</span></div>
                 
                 <div className="mb-12 font-bold">New here? <Link to="/auth/signup" className="text-indigo-600 underline hover:text-indigo-900">Create an account</Link></div>
