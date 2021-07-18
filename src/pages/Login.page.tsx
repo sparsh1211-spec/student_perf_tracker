@@ -219,10 +219,15 @@ const Login: React.FC<Props> = (props) => {
                             setPasswordtype(false);
                         }
                     }} className="shadow-md cursor-pointer" type="checkbox" /></div>
+                   
                 </div>
+
+                <div className="mt-4"><Link className="pt-8 font-semibold tracking-widest text-blue-800 text-md " to="/auth/forgotpassword">Forgot Password?</Link></div>
+                
                
 
             </form>
+           
         </>
 
 
