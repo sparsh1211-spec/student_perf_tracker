@@ -222,7 +222,7 @@ const Login: React.FC<Props> = (props) => {
                 <div className="mt-8 ml-32"><Link className="pt-8 font-semibold tracking-widest text-blue-800 text-md" to="/auth/forgotpassword">Forgot Password?</Link></div>
                 <p className="mt-16 font-semibold text-blue-600">© 2020 All Rights Reserved. Cookie Preferences, Privacy, and Terms.</p>
                
-             <Button>Sign in</Button>
+           
             </form>
            
         </>
