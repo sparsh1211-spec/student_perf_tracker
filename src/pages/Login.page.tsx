@@ -6,7 +6,10 @@ import { FaUserCircle, FaSpinner } from 'react-icons/fa';
 import { RiLockPasswordLine } from 'react-icons/ri';
 import * as yup from "yup";
 import { useFormik } from "formik";
+// import { HiLockClosed } from "react-icons/hi";
 // import Input from "../components/Input";
+
+import Button from "../components/Button/Button"
 
 
 interface Props {
@@ -215,21 +218,11 @@ const Login: React.FC<Props> = (props) => {
 
                     }} className="p-1 px-4 text-white bg-indigo-500 border-2 rounded-md shadow-md hover:opacity-60">Cancel</button></div>
                     </div>
-
-                    
-                   
-                   
-
                 </div>
-                
-
-                
-        
-
                 <div className="mt-8 ml-32"><Link className="pt-8 font-semibold tracking-widest text-blue-800 text-md" to="/auth/forgotpassword">Forgot Password?</Link></div>
                 <p className="mt-16 font-semibold text-blue-600">© 2020 All Rights Reserved. Cookie Preferences, Privacy, and Terms.</p>
                
-
+             <Button>Sign in</Button>
             </form>
            
         </>
