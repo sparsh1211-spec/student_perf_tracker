@@ -41,15 +41,6 @@ const Sidebar: React.FC<Props> = (props) => {
                                  </Dialog>
                              </Transition.Root>
         </div>
-
-
-
-           
-                             
-                            
-                                             
-
-            
     );
 
 };
