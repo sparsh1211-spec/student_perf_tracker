@@ -9,6 +9,10 @@ export default {
 export const Main = (args: any) => (<Input {...args}></Input>);
 
 Main.args = {
+    className:"",
+    placeholder:"",
+    touched:false,
+    error:"error displays here"
    
 }
 
