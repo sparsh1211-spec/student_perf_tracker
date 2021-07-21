@@ -22,9 +22,7 @@ Main.args = {
     children: "Sign in",
     className: "",
     disabled: false,
-    type: "submit",
-
-   
+    type: "submit",   
 }
 
 

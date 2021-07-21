@@ -4,7 +4,7 @@ import * as faicons from 'react-icons/fa';
 
 import "../../index.css"
 
-const icons={"No Icon" : undefined, ...heroicons, ...faicons,}
+const icons={"No Icon" : undefined, ...heroicons, ...faicons,} 
 
 export default {
     title: 'My Buttons',
