@@ -35,7 +35,7 @@ const Avatar: React.FC<Props> = (props) => {
     return (
         <div>
             {MyArr.map((users, index) => {
-                const distance = index * 16;
+                const distance = index * 5;
                
                 UsersLeft=(MyArr.length-4);
                 
@@ -47,14 +47,14 @@ const Avatar: React.FC<Props> = (props) => {
                 }                
                 return (
                   <div>
-                     <img src={users} alt="UserAvatars" className={"rounded-full border-white border-4 shadow-md absolute left-" + distance + " " + Visible}/>
+                     <img src={users} alt="UserAvatars" className={"rounded-full border-white border-4 shadow-md absolute top-0 " + Visible} style={{left:distance+'rem'}}/>
                 
                      </div>
                 );
                 
             })
         }
-        <button onClick={()=>setIsHidden(!isHidden)} className={"relative px-1 text-blue-500 rounded-full left-60 top-8 bg-white shadow-md hover:bg-gray-500 " + ButtonVisible}> + {UsersLeft} more</button>
+        <button onClick={()=>setIsHidden(!isHidden)} className={"relative px-1 text-blue-500 rounded-full left-72 top-8 bg-white shadow-md hover:bg-gray-500 " + ButtonVisible}> + {UsersLeft} more</button>
         
         </div>
     );
