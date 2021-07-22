@@ -13,7 +13,7 @@ export default {
 
         progress: {
             control: {
-                type: 'range', min: 10, max: 100, step: 10
+                type: 'range', min: 0, max: 100, 
             },
         },
 

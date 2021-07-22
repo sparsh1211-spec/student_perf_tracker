@@ -19,7 +19,7 @@ export default {
 export const Main = (args: any) => (<Alert {...args}></Alert>);
 
 Main.args = {
-    children: "Sign in",
+    children: "Hello! This is alert component Warning! Sample text here!!!!!!!!!",
     className: "",
     disabled: false,
     type: "submit",   

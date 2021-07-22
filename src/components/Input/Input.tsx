@@ -15,7 +15,7 @@ const Input: React.FC<Props> = ({ touched, error, className,id, placeholder, ...
             </label>)}
             <input id={id}
                 {...rest}
-                className={"outline-none border-black " + className}
+                className={"outline-none w-full border-b-2 border-gray-300 " + className}
                 placeholder={placeholder}/>
             {touched && <div className="text-red-500">{error}</div>}
         </div>

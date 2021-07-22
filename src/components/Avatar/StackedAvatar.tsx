@@ -47,7 +47,7 @@ const Avatar: React.FC<Props> = (props) => {
                 }                
                 return (
                   <div>
-                     <img src={users} alt="UserAvatars" className={"rounded-full border-white border-4 shadow-md absolute top-0 " + Visible} style={{left:distance+'rem'}}/>
+                     <img src={users} alt="UserAvatars" className={"rounded-full transform border-white border-4 shadow-md absolute top-0 hover:-translate-y-2 " + Visible} style={{left:distance+'rem'}}/>
                 
                      </div>
                 );
