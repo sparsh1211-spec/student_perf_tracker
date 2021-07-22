@@ -1,5 +1,5 @@
 
-import React, { ReactNodeArray, useState } from "react";
+import React, { useState } from "react";
 
 interface Props {
 
@@ -64,7 +64,4 @@ Avatar.defaultProps = {
 }
 
 export default React.memo(Avatar);
-function MyArr(MyArr: any): React.FC<Props> {
-    throw new Error("Function not implemented.");
-}
 
