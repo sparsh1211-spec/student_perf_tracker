@@ -9,7 +9,7 @@ export default {
 export const Main = (args: any) => (<StackedAvatar {...args}></StackedAvatar>);
 
 Main.args = {
-   arr:[]
+   
 }
 
 
