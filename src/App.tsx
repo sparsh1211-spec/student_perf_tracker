@@ -8,6 +8,7 @@ import {
   BrowserRouter,
   Redirect, 
 } from "react-router-dom";
+// import Avatar from "./components/Avatar/Avatar";
 import AppContainerPage from "./pages/AppContainer.page";
 import AuthPage from "./pages/Auth.page";
 import NotFoundPage from "./pages/NotFound.page";
@@ -24,6 +25,8 @@ interface Props{
 const App: React.FC<Props>=(props) => {
     return (
         <>
+       
+       
        <BrowserRouter>
        <Switch>
          <Route path="/"exact>
