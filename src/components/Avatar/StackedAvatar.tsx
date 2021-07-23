@@ -24,38 +24,26 @@ const Avatar: React.FC<Props> = (props) => {
         Visible="block"
     }
     if(isHidden===true){
-        ButtonVisible="hidden"
-       
+        ButtonVisible="hidden" 
     }
-   
-    
-
-   
 
     return (
         <div>
             {MyArr.map((users, index) => {
                 const distance = index * 5;
-               
                 UsersLeft=(MyArr.length-4);
-                
-            
                 if(index>=4&& (isHidden===false)){
                   Visible="hidden"
-                  
-                
                 }                
                 return (
                   <div>
-                     <img src={users} alt="UserAvatars" className={"rounded-full transform border-white border-4 shadow-md absolute top-0 hover:-translate-y-2 " + Visible} style={{left:distance+'rem'}}/>
-                
+                     <img src={users} alt="UserAvatars" className={"rounded-full transform ease-in-out duration-100 border-white border-4 shadow-md absolute top-0 hover:-translate-y-2 " + Visible} style={{left:distance+'rem'}}/>
                      </div>
                 );
                 
             })
         }
         <button onClick={()=>setIsHidden(!isHidden)} className={"relative px-1 text-blue-500 rounded-full left-72 top-8 bg-white shadow-md hover:bg-gray-500 " + ButtonVisible}> + {UsersLeft} more</button>
-        
         </div>
     );
 
