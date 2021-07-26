@@ -33,8 +33,8 @@ const Signup: React.FC<Props>=(props) => {
             password:""
         },
         validationSchema:yup.object().shape({
-            email: yup.string().required("Email is a required field!").email("Must be a valid Email!"),
-            password: yup.string().required("Password is a required field!").min(8,"Password must be of atleast 8 chars!"),
+            email: yup.string().required("*Email is a required field!*").email("*Must be a valid Email!*"),
+            password: yup.string().required("*Password is a required field!*").min(8,"*Password must be of atleast 8 chars!*"),
         }),
         onSubmit:(data)=>{
             console.log("form submitting",data);
@@ -102,8 +102,8 @@ const Signup: React.FC<Props>=(props) => {
                 
             <form className="mt-32 ml-36" onSubmit={handleSubmit}>
                 <div className="flex flex-col space-y-4">
-            <div className="mb-8 text-3xl font-semibold text-blue-500">Get started with a free account</div>
-            <div className="mb-12"><p className="inline font-semibold">Already have an account? </p><Link to="/auth/login" className="text-blue-700 underline">Log in</Link></div></div>
+            <div className="mb-8 text-3xl font-bold text-indigo-600">Get started with a free account</div>
+            <div className="mb-12"><p className="inline font-semibold">Already have an account? </p><Link to="/auth/login" className="font-bold text-blue-700 underline">Log in</Link></div></div>
                  
                 <div className="flex flex-col mt-12 space-y-10">
 
@@ -120,13 +120,8 @@ const Signup: React.FC<Props>=(props) => {
                         autoComplete="email"
                         required
                         {...getFieldProps("email")}/>
-
-
-
+                        {touched.email && <div className="text-sm font-semibold text-red-500 ">{errors.email}</div>}
                     </div>
-                    {touched.email && <div className="text-red-500 ">{errors.email}</div>}
-
-
                     <div className="flex items-center space-x-4 text-left border-b border-gray-300">
                         <label htmlFor="Password:" />
                         <RiLockPasswordLine className="text-indigo-600" style={{ margin: 0 + 'px' }} />
@@ -135,9 +130,9 @@ const Signup: React.FC<Props>=(props) => {
                         placeholder="Password"
                         required
                         {...getFieldProps("password")}/>
-
+                        {touched.password && <div className="text-sm font-semibold text-red-500">{errors.password}</div>}
                     </div>
-                    {touched.password && <div className="text-red-500">{errors.password}</div>}
+                    
                     <div className="mt-4"><input type="checkbox"></input><span className="text-blue-600"> I agree to the terms and conditions</span> </div>
 
                 </div>
@@ -162,21 +157,8 @@ const Signup: React.FC<Props>=(props) => {
 
                     }} className="p-1 px-4 text-white bg-indigo-500 border-2 rounded-md shadow-md hover:opacity-60">Cancel</button></div>
                     </div>
-
-                    
-                   
-                   
-
                 </div>
-                
-
-                
-        
-
-               
                 <p className="mt-16 font-semibold text-blue-600">© 2020 All Rights Reserved. Cookie Preferences, Privacy, and Terms.</p>
-               
-
             </form>
             </div>
 
