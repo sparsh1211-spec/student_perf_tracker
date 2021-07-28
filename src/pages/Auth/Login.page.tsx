@@ -6,7 +6,8 @@ import { FaUserCircle, FaSpinner } from 'react-icons/fa';
 import { RiLockPasswordLine } from 'react-icons/ri';
 import * as yup from "yup";
 import { useFormik } from "formik";
-import { login } from "../api";
+import { login } from "../../api/auth";
+import { User } from "../../models/User";
 // import { HiLockClosed } from "react-icons/hi";
 // import Input from "../components/Input";
 
@@ -14,6 +15,8 @@ import { login } from "../api";
 
 
 interface Props {
+
+    onLogin:(user:User)=>void;
 
 }
 
@@ -38,10 +41,10 @@ const Login: React.FC<Props> = (props) => {
             password: yup.string().required("*Password is a required field!*").min(8, "*Password must be of atleast 8 chars!*"),
         }),
         onSubmit: (data) => {
-            login(data).then(() => {
+            login(data).then((u) => {
+                props.onLogin(u);
                 history.push("/dashboard");
             });
-
         }
     });
     const [data, setData] = useState({ email: "", password: "" })//we can combine both of the above like this
