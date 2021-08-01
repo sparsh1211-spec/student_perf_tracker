@@ -8,6 +8,9 @@ import { fetchGroups } from "../../api/groups";
 // import { FaUserCircle, FaSpinner } from 'react-icons/fa';
 import { AiOutlineSearch } from 'react-icons/ai';
 import Button from '../../components/Button/Button'
+import { Group } from "../../models/Group";
+import { AppState } from "../../store";
+import { useDispatch, useSelector } from "react-redux";
 
 // interface Results {
 //     gender: string;
@@ -31,7 +34,10 @@ import Button from '../../components/Button/Button'
 // }
 interface Props { }
 const Dashboard: React.FC<Props> = () => {
-    const [user, setUser] = useState<any[]>([])
+    // const [user, setUser] = useState<any[]>([])
+    const group = useSelector<AppState, Group[]>((state) => state.groups);
+    console.log(group.length);
+    const dispatch=useDispatch();
 
 
     const [query, setQuery] = useState("");
@@ -60,9 +66,11 @@ const Dashboard: React.FC<Props> = () => {
 
     useEffect(() => {
         fetchGroups({ status: "all-groups", query }).then((response) => {
-            setUser(response)
-        }).catch((error) => console.log(error.message));
-    }, [query])
+            dispatch({ type: 'me/fetch', payload: response })
+            console.log("hello");
+            console.log(group)
+        });
+    }, [query])//eslint-disable-line
 
     // useEffect(() => {
     //     const filtered: any[]=[];
@@ -99,7 +107,7 @@ const Dashboard: React.FC<Props> = () => {
                 <div>
 
                 </div>
-                {user.map((item, index) => {
+                {group.map((item, index) => {
                     const itemnumber = index
                     if (itemnumber % 2 === 0) {
                         return (

@@ -1,24 +1,24 @@
 
-import React from "react";
+import React, {  } from "react";
 import { Route, Switch } from "react-router-dom";
 import AuthHero from "../../components/AuthHero";
 import LoginPage from "./Login.page";
 import SignupPage from "./Signup.page";
 import PasswordRecovery from "../PasswordRecovery.page"
-import { User } from "../../models/User";
+// import { User } from "../../models/User";
+// import AppContext from "../../App.context";
 
 interface Props {
 
-    onLogin:(user:User)=>void;
-
 }
 
-const Auth: React.FC<Props> = (props) => {
+const Auth: React.FC<Props> = () => {
+
     return (
         <div className="flex flex-row justify-between">
             <Switch>
                 <Route path="/auth/login">
-                    <LoginPage onLogin={props.onLogin}></LoginPage>
+                    <LoginPage></LoginPage>
                 </Route>
                 <Route path="/auth/signup">
                     <SignupPage></SignupPage>

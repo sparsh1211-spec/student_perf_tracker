@@ -7,7 +7,10 @@ import { RiLockPasswordLine } from 'react-icons/ri';
 import * as yup from "yup";
 import { useFormik } from "formik";
 import { login } from "../../api/auth";
-import { User } from "../../models/User";
+// import AppContext {user,setUser} from "../../App.context";
+// import { User } from "../../models/User";
+// import AppContext from "../../App.context";
+import { useDispatch } from "react-redux";
 // import { HiLockClosed } from "react-icons/hi";
 // import Input from "../components/Input";
 
@@ -16,15 +19,16 @@ import { User } from "../../models/User";
 
 interface Props {
 
-    onLogin:(user:User)=>void;
 
 }
 
-const Login: React.FC<Props> = (props) => {
+const Login: React.FC<Props> = () => {
 
     // const [email,setEmail]=useState("101.sp@gmail.com");
     // const [password,setPassword]=useState("");
     const history = useHistory();
+    const dispatch = useDispatch();
+    // const {setUser}=useContext(AppContext);
 
     const { getFieldProps,
         handleSubmit,
@@ -42,7 +46,7 @@ const Login: React.FC<Props> = (props) => {
         }),
         onSubmit: (data) => {
             login(data).then((u) => {
-                props.onLogin(u);
+                dispatch({ type: "me/login", payload: u })
                 history.push("/dashboard");
             });
         }
@@ -226,5 +230,5 @@ const Login: React.FC<Props> = (props) => {
 };
 Login.defaultProps = {
 }
-
 export default React.memo(Login);
+

@@ -1,5 +1,7 @@
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { AiOutlineLoading3Quarters} from 'react-icons/ai';
+// import AppContext from "./App.context";
 import {
   Switch,
   Route,
@@ -15,9 +17,15 @@ import { LS_AUTH_TOKEN } from "./api/base";
 import { Suspense } from "react";
 import AppContainerPageLazy from "./pages/AppContainer/AppContainer.lazy";
 import AuthLazy from "./pages/Auth/Auth.lazy";
-import { User } from "./models/User";
+// import { User } from "./models/User";
 import { me } from "./api";
 import Nav from "../src/Nav";
+import Header from "./Header";
+import { AppState } from "./store";
+import { useDispatch, useSelector } from "react-redux";
+import { User } from "./models/User";
+// import UserInformation from "./UserInformation";
+// import Sidebar from "./components/Sidebar";
 // import DashboardPage from "./pages/Dashboard.page";
 // import LoginPage from "./pages/Login.page";
 // import RecordingsPage from "./pages/Recordings.page";
@@ -33,54 +41,65 @@ import Nav from "../src/Nav";
 
 
 interface Props {
-
 }
 
 const App: React.FC<Props> = (props) => {
 
-  const [user, setUser] = useState<User>();
+  //  const [user, setUser] = useState<User>();
+  const user = useSelector<AppState, User | undefined>((state) => state.me);
+  const dispatch = useDispatch();
+
   console.log(user);
 
   const token = localStorage.getItem(LS_AUTH_TOKEN);
+
+
 
   useEffect(() => {
     if (!token || user) {
       return;
     }
 
-    me().then(u => setUser(u));
-  }, [token,user])
+    me().then((u) => dispatch({ type: "me/login", payload: u }));
+  }, [])//eslint-disable-line react-hooks/exhaustive-deps
 
   console.log("App rerendering and token is: " + token);
 
   if (!user && token) {
-    return <div>Loading....</div>
+    return <div className="text-3xl font-bold mt-36 ml-96">Loading....<AiOutlineLoading3Quarters className="animate-spin"/></div>
   }
   return (
     <>
+
       <BrowserRouter>
         <Switch>
           <Route path="/" exact>
             {user ? <Redirect to="/dashboard" /> : <Redirect to="/auth/login" />}
           </Route>
           <Route path="/auth">
-            {user ? (<Redirect to="/dashboard" />) : (<Suspense fallback={<div className="text-red-500">Loading Auth page....</div>}> <AuthLazy onLogin={setUser} /></Suspense>)}
+            {user ? (<Redirect to="/dashboard" />) : (<Suspense fallback={<div className="text-red-500">Loading....<AiOutlineLoading3Quarters className="animate-spin"/></div>}> <AuthLazy /></Suspense>)}
           </Route>
           <Route path={["/dashboard",
             "/recordings",
+            "/usersettings",
             "/batch/:batchNumber/lecture/:lectureNumber"
           ]}>
-            <Nav/>
-            <Suspense fallback={<div className="text-red-500">Loading APP CONTAINER PAGE...</div>}>
-              {user ? (<AppContainerPageLazy user={user!} />) : (<Redirect to="/auth/login" />)}
+            <Nav />
+            <Header />
+            <Suspense fallback={<div className="text-red-500">Loading....<AiOutlineLoading3Quarters className="animate-spin"></AiOutlineLoading3Quarters></div>}>
+              {user ? (<AppContainerPageLazy />) : (<Redirect to="/auth/login" />)}
             </Suspense>
           </Route>
+          {/* <Route path="/usersettings">
+            <UserInformation user={user!}/>
+          </Route> */}
           <Route>
             <NotFoundPage />
           </Route>
         </Switch>
       </BrowserRouter>
-    </>
+
+  </>
   );
 
 };

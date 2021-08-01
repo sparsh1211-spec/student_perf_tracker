@@ -13,6 +13,7 @@ interface GroupRequest {
  interface GroupResponse{
      data:Group[];
  }
+ 
 // export const fetchGroups = (data: GroupRequest) => {
 //     const url = BASE_URL + "/groups";
 
@@ -25,6 +26,7 @@ interface GroupRequest {
 //             console.log(response.data.group_image_url);
 //             return response.data.group_image_url;
 //         });
+
 export const fetchGroups = (data: GroupRequest) =>{
     return axios.get<GroupResponse>("https://api-dev.domecompass.com/groups", 
     { params: data, headers: { Authorization: localStorage.getItem("auth_token") } })
