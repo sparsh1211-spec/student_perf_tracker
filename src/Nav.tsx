@@ -1,10 +1,11 @@
 
 import React from "react";
 import { AiOutlineSearch } from "react-icons/ai";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import logo from "./logonew.svg";
-import { User } from "./models/User";
-import { AppState } from "./store";
+// import { User } from "./models/User";
+import { useAppSelector } from "./store";
+// import { AppState } from "./store";
 // import { fetchGroups } from "./api";
 
 interface Props {
@@ -12,7 +13,7 @@ interface Props {
 }
 
 const Nav: React.FC<Props> = (props) => {
-    const user = useSelector<AppState, User | undefined>((state) => state.me);
+    const userProfilePic = useAppSelector((state) => state.users.byId[state.auth.id!].profile_pic_url);
 
     return (
         <>
@@ -32,7 +33,7 @@ const Nav: React.FC<Props> = (props) => {
 
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="text-white feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="text-white feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
-                            <img src={user!.profile_pic_url} alt="avatar" className="w-8 h-8 rounded-full"></img>
+                            <img src={userProfilePic} alt="avatar" className="w-8 h-8 rounded-full"></img>
                             </div>
                         
                     </div>

@@ -1,6 +1,6 @@
 
 import React, { useEffect } from "react";
-import { AiOutlineLoading3Quarters} from 'react-icons/ai';
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 // import AppContext from "./App.context";
 import {
   Switch,
@@ -21,9 +21,10 @@ import AuthLazy from "./pages/Auth/Auth.lazy";
 import { me } from "./api";
 import Nav from "../src/Nav";
 import Header from "./Header";
-import { AppState } from "./store";
-import { useDispatch, useSelector } from "react-redux";
-import { User } from "./models/User";
+import { useAppSelector } from "./store";
+// import { useDispatch } from "react-redux";
+import { authActions } from "./actions/auth.actions";
+// import { User } from "./models/User";
 // import UserInformation from "./UserInformation";
 // import Sidebar from "./components/Sidebar";
 // import DashboardPage from "./pages/Dashboard.page";
@@ -46,8 +47,8 @@ interface Props {
 const App: React.FC<Props> = (props) => {
 
   //  const [user, setUser] = useState<User>();
-  const user = useSelector<AppState, User | undefined>((state) => state.me);
-  const dispatch = useDispatch();
+  const user = useAppSelector((state) => state.auth.id && state.users.byId[state.auth.id])
+  // const dispatch = useDispatch();
 
   console.log(user);
 
@@ -60,13 +61,13 @@ const App: React.FC<Props> = (props) => {
       return;
     }
 
-    me().then((u) => dispatch({ type: "me/login", payload: u }));
+    me().then((u) =>authActions.fetch(u));
   }, [])//eslint-disable-line react-hooks/exhaustive-deps
 
   console.log("App rerendering and token is: " + token);
 
   if (!user && token) {
-    return <div className="text-3xl font-bold mt-36 ml-96">Loading....<AiOutlineLoading3Quarters className="animate-spin"/></div>
+    return <div className="text-3xl font-bold mt-36 ml-96">Loading....<AiOutlineLoading3Quarters className="animate-spin" /></div>
   }
   return (
     <>
@@ -77,7 +78,7 @@ const App: React.FC<Props> = (props) => {
             {user ? <Redirect to="/dashboard" /> : <Redirect to="/auth/login" />}
           </Route>
           <Route path="/auth">
-            {user ? (<Redirect to="/dashboard" />) : (<Suspense fallback={<div className="text-red-500">Loading....<AiOutlineLoading3Quarters className="animate-spin"/></div>}> <AuthLazy /></Suspense>)}
+            {user ? (<Redirect to="/dashboard" />) : (<Suspense fallback={<div className="text-red-500">Loading....<AiOutlineLoading3Quarters className="animate-spin" /></div>}> <AuthLazy /></Suspense>)}
           </Route>
           <Route path={["/dashboard",
             "/recordings",
@@ -99,7 +100,7 @@ const App: React.FC<Props> = (props) => {
         </Switch>
       </BrowserRouter>
 
-  </>
+    </>
   );
 
 };

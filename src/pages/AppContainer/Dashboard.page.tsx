@@ -8,9 +8,10 @@ import { fetchGroups } from "../../api/groups";
 // import { FaUserCircle, FaSpinner } from 'react-icons/fa';
 import { AiOutlineSearch } from 'react-icons/ai';
 import Button from '../../components/Button/Button'
-import { Group } from "../../models/Group";
-import { AppState } from "../../store";
-import { useDispatch, useSelector } from "react-redux";
+// import { Group } from "../../models/Group";
+// import { AppState } from "../../store";
+import { useDispatch} from "react-redux";
+import { useAppSelector } from "../../store";
 
 // interface Results {
 //     gender: string;
@@ -35,12 +36,16 @@ import { useDispatch, useSelector } from "react-redux";
 interface Props { }
 const Dashboard: React.FC<Props> = () => {
     // const [user, setUser] = useState<any[]>([])
-    const group = useSelector<AppState, Group[]>((state) => state.groups);
-    console.log(group.length);
+    const groups = useAppSelector((state) =>{
+        const groupIds=state.groups.queryMap[state.groups.query] || []
+        const groups=groupIds.map(id=>state.groups.byId[id]);
+        return groups;
+    });
     const dispatch=useDispatch();
 
 
-    const [query, setQuery] = useState("");
+    // const [query, setQuery] = useState("");
+    const query=useAppSelector(state=>state.groups.query)
     const [offset, setOffset] = useState(0);
 
     //  const [searchContent, setSearchContent] = useState("");
@@ -65,10 +70,9 @@ const Dashboard: React.FC<Props> = () => {
     //  };
 
     useEffect(() => {
-        fetchGroups({ status: "all-groups", query }).then((response) => {
-            dispatch({ type: 'me/fetch', payload: response })
-            console.log("hello");
-            console.log(group)
+        fetchGroups({ status: "all-groups", query}).then((groups) => {
+            dispatch({ type: "groups/query_completed", payload: {groups:groups,query:query} })
+           
         });
     }, [query])//eslint-disable-line
 
@@ -95,8 +99,8 @@ const Dashboard: React.FC<Props> = () => {
                     <div className="flex items-center mt-3 mb-12">
                         <div className="ml-64 border-b-2 border-gray-600">
                             <AiOutlineSearch className="inline w-5 h-6 mr-12" />
-                            <input onChange={(event) => {
-                                setQuery(event.target.value);
+                            <input value={query} onChange={(event) => {
+                                 dispatch({ type: 'groups/query', payload: event.target.value })
                             }} className="w-64 outline-none " placeholder="Search group here"></input>
                         </div>
 
@@ -107,7 +111,7 @@ const Dashboard: React.FC<Props> = () => {
                 <div>
 
                 </div>
-                {group.map((item, index) => {
+                {groups.map((item, index) => {
                     const itemnumber = index
                     if (itemnumber % 2 === 0) {
                         return (
