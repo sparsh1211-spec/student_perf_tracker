@@ -10,8 +10,10 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import Button from '../../components/Button/Button'
 // import { Group } from "../../models/Group";
 // import { AppState } from "../../store";
-import { useDispatch} from "react-redux";
+// import { useDispatch} from "react-redux";
 import { useAppSelector } from "../../store";
+import { groupActions } from "../../actions/groups.actions";
+import { groupQuerySelector, groupSelector } from "../../selectors/groups.selectors";
 
 // interface Results {
 //     gender: string;
@@ -36,16 +38,12 @@ import { useAppSelector } from "../../store";
 interface Props { }
 const Dashboard: React.FC<Props> = () => {
     // const [user, setUser] = useState<any[]>([])
-    const groups = useAppSelector((state) =>{
-        const groupIds=state.groups.queryMap[state.groups.query] || []
-        const groups=groupIds.map(id=>state.groups.byId[id]);
-        return groups;
-    });
-    const dispatch=useDispatch();
+    const groups = useAppSelector(groupSelector);
+    // const dispatch=useDispatch();
 
 
     // const [query, setQuery] = useState("");
-    const query=useAppSelector(state=>state.groups.query)
+    const query=useAppSelector(groupQuerySelector)
     const [offset, setOffset] = useState(0);
 
     //  const [searchContent, setSearchContent] = useState("");
@@ -70,10 +68,7 @@ const Dashboard: React.FC<Props> = () => {
     //  };
 
     useEffect(() => {
-        fetchGroups({ status: "all-groups", query}).then((groups) => {
-            dispatch({ type: "groups/query_completed", payload: {groups:groups,query:query} })
-           
-        });
+        fetchGroups({ status: "all-groups", query}).then((groups) => groupActions.queryCompleted(query,groups));
     }, [query])//eslint-disable-line
 
     // useEffect(() => {
@@ -100,7 +95,7 @@ const Dashboard: React.FC<Props> = () => {
                         <div className="ml-64 border-b-2 border-gray-600">
                             <AiOutlineSearch className="inline w-5 h-6 mr-12" />
                             <input value={query} onChange={(event) => {
-                                 dispatch({ type: 'groups/query', payload: event.target.value })
+                                groupActions.query(event.target.value)
                             }} className="w-64 outline-none " placeholder="Search group here"></input>
                         </div>
 

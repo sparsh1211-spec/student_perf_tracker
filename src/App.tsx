@@ -24,6 +24,7 @@ import Header from "./Header";
 import { useAppSelector } from "./store";
 // import { useDispatch } from "react-redux";
 import { authActions } from "./actions/auth.actions";
+import { meSelector } from "./selectors/auth.selectors";
 // import { User } from "./models/User";
 // import UserInformation from "./UserInformation";
 // import Sidebar from "./components/Sidebar";
@@ -47,7 +48,7 @@ interface Props {
 const App: React.FC<Props> = (props) => {
 
   //  const [user, setUser] = useState<User>();
-  const user = useAppSelector((state) => state.auth.id && state.users.byId[state.auth.id])
+  const user = useAppSelector(meSelector)
   // const dispatch = useDispatch();
 
   console.log(user);
