@@ -51,7 +51,11 @@ const Login: React.FC<Props> = () => {
                 history.push("/dashboard");
             });
         }
+       
     });
+    console.log("hell");
+
+   
     const [data, setData] = useState({ email: "", password: "" })//we can combine both of the above like this
     console.log(setData);
     // const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -80,9 +84,9 @@ const Login: React.FC<Props> = () => {
 
     //checking functioning of yup library(syntax&working)
 
-    const emailValidator = yup.string().required().email();
-    const passwordValidator = yup.string().required().min(8);//for strings input
-    const negArr = yup.array().required().of(yup.number().negative());//for array of negative numbers
+    // const emailValidator = yup.string().required().email();
+    // const passwordValidator = yup.string().required().min(8);//for strings input
+    // const negArr = yup.array().required().of(yup.number().negative());//for array of negative numbers
     // const numberValidator=yup.number().positive();//for positive numbers
     // const positiveNumberVaildator=yup.array().of(yup.number().positive());//for array of postive numbers
 
@@ -95,7 +99,7 @@ const Login: React.FC<Props> = () => {
     try {
         formValidator.validateSync(data);
     } catch (e) {
-        console.log(e);
+        // console.log(e);
     }
 
 
@@ -120,31 +124,31 @@ const Login: React.FC<Props> = () => {
     // "isValidSync" returns boolean value.
 
 
-    console.log(negArr);
+    // console.log(negArr);
 
-    console.log("isformvalid", formValidator.isValidSync(data));
+    // console.log("isformvalid", formValidator.isValidSync(data));
 
 
 
-    console.log("email validator",
-        emailValidator.isValidSync(""),
-        emailValidator.isValidSync(undefined),
-        emailValidator.isValidSync("hello"),
-        emailValidator.isValidSync(5),
-        emailValidator.isValidSync("hello@gmail.com"),
-        emailValidator.isValidSync("hi@codespx.io"),
+    // console.log("email validator",
+    //     emailValidator.isValidSync(""),
+    //     emailValidator.isValidSync(undefined),
+    //     emailValidator.isValidSync("hello"),
+    //     emailValidator.isValidSync(5),
+    //     emailValidator.isValidSync("hello@gmail.com"),
+    //     emailValidator.isValidSync("hi@codespx.io"),
 
-    );
+    // );
 
-    console.log("password validator",
-        passwordValidator.isValidSync(""),
-        passwordValidator.isValidSync(undefined),
-        passwordValidator.isValidSync("hello"),
-        passwordValidator.isValidSync(5),
-        passwordValidator.isValidSync("hello@gmail.com"),
-        passwordValidator.isValidSync("hi@codespx.io"),
+    // console.log("password validator",
+    //     passwordValidator.isValidSync(""),
+    //     passwordValidator.isValidSync(undefined),
+    //     passwordValidator.isValidSync("hello"),
+    //     passwordValidator.isValidSync(5),
+    //     passwordValidator.isValidSync("hello@gmail.com"),
+    //     passwordValidator.isValidSync("hi@codespx.io"),
 
-    );
+    // );
 
 
     // if (!data.email) {

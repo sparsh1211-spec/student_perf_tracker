@@ -84,8 +84,10 @@ const App: React.FC<Props> = (props) => {
           <Route path={["/dashboard",
             "/recordings",
             "/usersettings",
+            "/groups",
+            "/groups/:id",
             "/batch/:batchNumber/lecture/:lectureNumber"
-          ]}>
+          ]} exact>
             <Nav />
             <Header />
             <Suspense fallback={<div className="text-red-500">Loading....<AiOutlineLoading3Quarters className="animate-spin"></AiOutlineLoading3Quarters></div>}>

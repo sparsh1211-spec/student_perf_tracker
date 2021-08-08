@@ -1,6 +1,7 @@
 import { createSelector } from "reselect";
 // import { AppState } from "../store";
-import { groupStateSelector } from "./app.selectors";
+// import { AppState } from "../store";
+import { groupsStateSelector } from "./app.selectors";
 
 // export const groupQuerySelector = (state: AppState) => {
 //     const groupState = groupStateSelector(state);
@@ -14,13 +15,14 @@ import { groupStateSelector } from "./app.selectors";
 // }
 
 
-export const groupQuerySelector = createSelector([groupStateSelector],
+export const groupQuerySelector = createSelector([groupsStateSelector],
     (groupState) => groupState.query);
 
+export const groupQueryMapSelector = createSelector([groupsStateSelector],
+    (groupState) => groupState.queryMap)
 
-export const groupQueryMapSelector = createSelector([groupStateSelector],(groupState)=>groupState.queryMap)
-
-export const groupByIdSelector = createSelector([groupStateSelector],(groupState)=>groupState.byId)
+export const groupByIdSelector = createSelector([groupsStateSelector],
+    (groupState) => groupState.byId)
 
 
 // export const groupSelector = (state: AppState) => {
@@ -34,10 +36,40 @@ export const groupByIdSelector = createSelector([groupStateSelector],(groupState
 //     return groups;
 // }
 
-export const groupSelector = createSelector(
-    [groupQuerySelector, groupByIdSelector, groupQueryMapSelector], (query, byId, queryMap) => {
+export const groupsSelector = createSelector(
+    [groupQuerySelector,
+    groupByIdSelector,
+    groupQueryMapSelector,
+    ],
+    (query, byId, queryMap) => {
 
         const groupsIds = queryMap[query] || [];
         const groups = groupsIds.map((id) => byId[id]);
         return groups;
     })
+
+    export const currentSelectedGroupIdSelector = createSelector(
+        [groupsStateSelector],
+        (groupState) => groupState.currentSelectedGroupId
+    );
+    
+    export const currentSelectedGroupSelector = createSelector(
+        [currentSelectedGroupIdSelector, groupByIdSelector],
+        (id, byId) => {
+            return id !== undefined ? byId[id] : undefined;
+        }
+    );
+    
+    export const groupNextIdSelector = createSelector(
+        [groupsStateSelector],
+        (groupState) => {
+            return groupState.nextGroupId;
+        }
+    );
+    
+    export const groupPrevIdSelector = createSelector(
+        [groupsStateSelector],
+        (groupState) => {
+            return groupState.prevGroupId;
+        }
+    );

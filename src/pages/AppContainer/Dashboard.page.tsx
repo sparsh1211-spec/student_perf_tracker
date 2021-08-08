@@ -13,7 +13,7 @@ import Button from '../../components/Button/Button'
 // import { useDispatch} from "react-redux";
 import { useAppSelector } from "../../store";
 import { groupActions } from "../../actions/groups.actions";
-import { groupQuerySelector, groupSelector } from "../../selectors/groups.selectors";
+import { groupQuerySelector, groupsSelector } from "../../selectors/groups.selectors";
 
 // interface Results {
 //     gender: string;
@@ -37,8 +37,9 @@ import { groupQuerySelector, groupSelector } from "../../selectors/groups.select
 // }
 interface Props { }
 const Dashboard: React.FC<Props> = () => {
+    console.log("hello");
     // const [user, setUser] = useState<any[]>([])
-    const groups = useAppSelector(groupSelector);
+    const groups = useAppSelector(groupsSelector);
     // const dispatch=useDispatch();
 
 
@@ -86,8 +87,10 @@ const Dashboard: React.FC<Props> = () => {
 
 
     return (
+       
 
         <>
+        
             <div className="">
 
                 <form>

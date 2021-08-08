@@ -25,8 +25,6 @@ interface LoginResponse {
 // }
 
 
-
-
 export const login = (data: LoginRequest) => {
     const url = BASE_URL + "/login";
     console.log(data);
@@ -57,12 +55,18 @@ export const logout = () => {
     localStorage.removeItem(LS_AUTH_TOKEN);
 }
 
-interface MeResposne{
-    data:User;
+interface MeResposne {
+    data: User;
 }
 
 
 export const me = () => {
     const url = BASE_URL + "/me"
-    return axios.get<MeResposne>(url).then(response=>response.data.data);
+    return axios.get<MeResposne>(url).then(response => response.data.data);
 };
+
+
+export const meUpdate=(data:any)=>{
+    const url = BASE_URL + "/me"
+    return axios.put<MeResposne>(url,data).then(response=>response.data.data)
+}

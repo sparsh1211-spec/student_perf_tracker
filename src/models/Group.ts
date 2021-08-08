@@ -1,8 +1,10 @@
 // import { User } from "./User";
 // import { State } from "./State";
 
-export interface Group {
-    id: number;
+import { Entity } from "./Entity";
+
+export interface Group extends Entity {
+    // id: number;
     name: string;
     is_private?: boolean;
     description?: string;

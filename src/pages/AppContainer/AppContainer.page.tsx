@@ -5,6 +5,8 @@ import Sidebar from "../../components/Sidebar";
 // import { User } from "../../models/User";
 import UserInformation from "../../UserInformation";
 import DashboardPage from "./Dashboard.page";
+import GroupPage from "./Group.page";
+import GroupsPage from "./Groups.page";
 import LecturePage from "./Lecture.page";
 import RecordingsPage from "./Recordings.page";
 
@@ -23,6 +25,12 @@ const AppContainer: React.FC<Props>=() => {
          </Route>
          <Route path="/usersettings">
             <UserInformation/>
+          </Route>
+          <Route path="/groups" exact>
+            <GroupsPage/>
+          </Route>
+          <Route path="/groups/:id">
+            <GroupPage/>
           </Route>
          <Route path="/recordings">
            <RecordingsPage/>
