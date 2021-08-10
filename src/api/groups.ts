@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { CancelToken} from "axios";
 import { Group } from "../models/Group";
 
 
@@ -27,9 +27,9 @@ export interface GroupRequest {
 //             return response.data.group_image_url;
 //         });
 
-export const fetchGroups = (data: GroupRequest) =>{
+export const fetchGroups = (data: GroupRequest,token?:CancelToken) =>{
     return axios.get<GroupResponse>("https://api-dev.domecompass.com/groups", 
-    { params: data, headers: { Authorization: localStorage.getItem("auth_token") } })
+    { params: data, cancelToken:token, headers: { Authorization: localStorage.getItem("auth_token") } })
     .then((response) =>{
         console.log(response.data.data)
         return response.data.data;

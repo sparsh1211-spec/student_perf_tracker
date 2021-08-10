@@ -7,7 +7,7 @@ export interface GroupState extends EntityState<Group> {
 
     query: string;
     queryMap: { [query: string]: number[] };
-    loadingQuery: { [query: string]: boolean };
+    loading:boolean;
     currentSelectedGroupId?: number;
     // query: string;
     // currentSelectedGroupId?: number;
@@ -21,7 +21,7 @@ const initialState = {
     byId: {},
     query: "",
     queryMap: {},
-    loadingQuery: {}
+    loading:false,
 }
 
 export const groupReducer: Reducer<GroupState> = (state = initialState, action) => {
@@ -30,7 +30,7 @@ export const groupReducer: Reducer<GroupState> = (state = initialState, action) 
         case GROUPS_QUERY:
             const query = action.payload;
             return {
-                ...state, query: query, loadingQuery: { ...state.loadingQuery, [query]: true }
+                ...state, query: query, loading:true
             };
 
         case GROUPS_QUERY_COMPLETED:
@@ -45,7 +45,7 @@ export const groupReducer: Reducer<GroupState> = (state = initialState, action) 
                     ...newState.queryMap,
                     [action.payload.query]: groupIds
                 },
-                loadingQuery: { ...newState.loadingQuery, [action.payload.query]: false }
+                loading:false
             };
         case CURRENT_SELECTED_GROUP_ID:
             const id = action.payload as number;

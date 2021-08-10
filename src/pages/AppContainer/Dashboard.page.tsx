@@ -13,7 +13,7 @@ import Button from '../../components/Button/Button'
 // import { useDispatch} from "react-redux";
 import { useAppSelector } from "../../store";
 // import { groupActions } from "../../actions/groups.actions";
-import { groupLoadingSelector, groupQuerySelector, groupsSelector } from "../../selectors/groups.selectors";
+import { groupQuerySelector, groupsLoadingSelector, groupsSelector } from "../../selectors/groups.selectors";
 import { FaSpinner } from "react-icons/fa";
 
 // interface Results {
@@ -46,7 +46,7 @@ const Dashboard: React.FC<Props> = () => {
 
     // const [query, setQuery] = useState("");
     const query = useAppSelector(groupQuerySelector);
-    const loading=useAppSelector(groupLoadingSelector)
+    const loading=useAppSelector(groupsLoadingSelector)
     const [offset, setOffset] = useState(0);
 
     //  const [searchContent, setSearchContent] = useState("");

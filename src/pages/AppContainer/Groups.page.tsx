@@ -2,7 +2,7 @@
 import React from "react";
 import { groupActions } from "../../actions/groups.actions";
 import { fetchGroups } from "../../middlewares/groups.middleware";
-import { groupLoadingSelector, groupQuerySelector, groupsSelector } from "../../selectors/groups.selectors";
+import { groupsLoadingSelector, groupQuerySelector, groupsSelector } from "../../selectors/groups.selectors";
 import { useAppSelector } from "../../store";
 import { GoSearch } from "react-icons/go"
 import { useHistory } from "react-router-dom";
@@ -16,7 +16,7 @@ const Groups: React.FC<Props> = () => {
     const history = useHistory();
     const groups = useAppSelector(groupsSelector);
     const query = useAppSelector(groupQuerySelector);
-    const loading = useAppSelector(groupLoadingSelector);
+    const loading = useAppSelector(groupsLoadingSelector);
 
 
     // useEffect(() => {
