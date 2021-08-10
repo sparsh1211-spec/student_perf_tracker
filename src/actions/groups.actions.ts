@@ -6,9 +6,9 @@ import { CURRENT_SELECTED_GROUP, CURRENT_SELECTED_GROUP_ID, GROUPS_QUERY, GROUPS
 // import { store } from "../store";
 
 
-const groupsQueryAction = (query: string,loading:boolean) => ({
+const groupsQueryAction = (query: string) => ({
     type: GROUPS_QUERY,
-    payload:{ query,loading},
+    payload:query,
 });
 
 
