@@ -1,9 +1,9 @@
 
 // import { setupMaster } from "cluster";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 // import { Link } from "react-router-dom";
 // import { isTypeNode } from "typescript";
-import { fetchGroups } from "../../api/groups";
+import { fetchGroups } from "../../middlewares/groups.middleware";
 // import logo from "../logonew.svg";
 // import { FaUserCircle, FaSpinner } from 'react-icons/fa';
 import { AiOutlineSearch } from 'react-icons/ai';
@@ -12,8 +12,9 @@ import Button from '../../components/Button/Button'
 // import { AppState } from "../../store";
 // import { useDispatch} from "react-redux";
 import { useAppSelector } from "../../store";
-import { groupActions } from "../../actions/groups.actions";
-import { groupQuerySelector, groupsSelector } from "../../selectors/groups.selectors";
+// import { groupActions } from "../../actions/groups.actions";
+import { groupLoadingSelector, groupQuerySelector, groupsSelector } from "../../selectors/groups.selectors";
+import { FaSpinner } from "react-icons/fa";
 
 // interface Results {
 //     gender: string;
@@ -44,7 +45,8 @@ const Dashboard: React.FC<Props> = () => {
 
 
     // const [query, setQuery] = useState("");
-    const query=useAppSelector(groupQuerySelector)
+    const query = useAppSelector(groupQuerySelector);
+    const loading=useAppSelector(groupLoadingSelector)
     const [offset, setOffset] = useState(0);
 
     //  const [searchContent, setSearchContent] = useState("");
@@ -68,9 +70,9 @@ const Dashboard: React.FC<Props> = () => {
     //      setSearchContent(event.target.value);
     //  };
 
-    useEffect(() => {
-        fetchGroups({ status: "all-groups", query}).then((groups) => groupActions.queryCompleted(query,groups));
-    }, [query])//eslint-disable-line
+    // useEffect(() => {
+    //     fetchGroups({ status: "all-groups", query}).then((groups) => groupActions.queryCompleted(query,groups));
+    // }, [query])//eslint-disable-line
 
     // useEffect(() => {
     //     const filtered: any[]=[];
@@ -83,23 +85,17 @@ const Dashboard: React.FC<Props> = () => {
     //     console.log(filtered);
     //  }, [searchContent,user]);
 
-
-
-
     return (
-       
-
         <>
-        
-            <div className="">
-
+        <div className="">
                 <form>
                     <div className="flex items-center mt-3 mb-12">
                         <div className="ml-64 border-b-2 border-gray-600">
                             <AiOutlineSearch className="inline w-5 h-6 mr-12" />
                             <input value={query} onChange={(event) => {
-                                groupActions.query(event.target.value)
+                                fetchGroups({ query: event.target.value, status: "all-groups" })
                             }} className="w-64 outline-none " placeholder="Search group here"></input>
+                            {loading&&<FaSpinner className="mt-4 animate-spin" />}
                         </div>
 
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="text-white ml-96 feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
@@ -107,7 +103,6 @@ const Dashboard: React.FC<Props> = () => {
 
                 </form>
                 <div>
-
                 </div>
                 {groups.map((item, index) => {
                     const itemnumber = index
@@ -121,7 +116,6 @@ const Dashboard: React.FC<Props> = () => {
                                     <div className="mb-6 text-base font-semibold text-gray-600"> {item.description}</div>
                                 </div>
                             </div>
-
                         )
                     }
                     else {
@@ -133,21 +127,14 @@ const Dashboard: React.FC<Props> = () => {
                                     <div className="mb-6 text-2xl font-bold text-gray-300"> {item.name}</div>
                                     <div className="mb-6 text-base font-semibold text-gray-300"> {item.description}</div>
                                 </div>
-
-
                             </div>
-
-
-
                         )
                     }
                 })}
                 <Button onChange={() => setOffset(offset + 40)}>Change</Button>
-
             </div>
         </>
     );
-
 };
 Dashboard.defaultProps = {
 }

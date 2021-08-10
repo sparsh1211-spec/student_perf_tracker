@@ -4,10 +4,10 @@ import { Group } from "../models/Group";
 
 
 
-interface GroupRequest {
+export interface GroupRequest {
     limit?: number;
     offset?: number;//kitne results k baad waale result
-    query?: string;
+    query: string;
     status: "all-groups" | "favourite" | "archieved";
 }
  interface GroupResponse{

@@ -18,12 +18,12 @@ import { Suspense } from "react";
 import AppContainerPageLazy from "./pages/AppContainer/AppContainer.lazy";
 import AuthLazy from "./pages/Auth/Auth.lazy";
 // import { User } from "./models/User";
-import { me } from "./api";
+import { me } from "./middlewares/auth.middleware";
 import Nav from "../src/Nav";
 import Header from "./Header";
 import { useAppSelector } from "./store";
 // import { useDispatch } from "react-redux";
-import { authActions } from "./actions/auth.actions";
+// import { authActions } from "./actions/auth.actions";
 import { meSelector } from "./selectors/auth.selectors";
 // import { User } from "./models/User";
 // import UserInformation from "./UserInformation";
@@ -62,13 +62,13 @@ const App: React.FC<Props> = (props) => {
       return;
     }
 
-    me().then((u) =>authActions.fetch(u));
+    me();
   }, [])//eslint-disable-line react-hooks/exhaustive-deps
 
   console.log("App rerendering and token is: " + token);
 
   if (!user && token) {
-    return <div className="text-3xl font-bold mt-36 ml-96">Loading....<AiOutlineLoading3Quarters className="animate-spin" /></div>
+    return <div className="h-screen bg-blue-300"><AiOutlineLoading3Quarters className="text-blue-600 h-96 w-96 animate-spin ml-96"/></div>
   }
   return (
     <>
@@ -79,7 +79,7 @@ const App: React.FC<Props> = (props) => {
             {user ? <Redirect to="/dashboard" /> : <Redirect to="/auth/login" />}
           </Route>
           <Route path="/auth">
-            {user ? (<Redirect to="/dashboard" />) : (<Suspense fallback={<div className="text-red-500">Loading....<AiOutlineLoading3Quarters className="animate-spin" /></div>}> <AuthLazy /></Suspense>)}
+            {user ? (<Redirect to="/dashboard" />) : (<Suspense fallback={<div className="text-red-500 bg-blue-300">Loading....<AiOutlineLoading3Quarters className="animate-spin" /></div>}> <AuthLazy /></Suspense>)}
           </Route>
           <Route path={["/dashboard",
             "/recordings",

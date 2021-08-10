@@ -11,6 +11,7 @@ interface Props{
 }
 
 const Group: React.FC<Props>=(props) => {
+    console.log("jai hind")
     const group = useAppSelector(currentSelectedGroupSelector);
     const {id}=useParams<any>()
     useEffect(() => {

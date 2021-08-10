@@ -113,7 +113,8 @@ const Sidebar: React.FC<Props> = () => {
                     history.push("/auth/login");
                 }}>Logout</Button>
 
-                <NavLink to="/groups" className="p-4 m-20 text-white bg-gray-600 border border-black rounded-full h-44 w-36 hover:opacity-50"  activeClassName="hidden">GO TO GROUPS PAGE</NavLink>
+                <NavLink to="/groups" className="block p-1 pl-2 mb-4 ml-20 text-white bg-gray-600 border border-black rounded-full w-44 hover:opacity-50"  activeClassName="hidden">GO TO GROUPS PAGE</NavLink>
+                <Link to="/recordings" className="p-2 ml-20 text-white bg-gray-600">Go to recordings page</Link>
             </div>
 
 
