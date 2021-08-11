@@ -6,13 +6,13 @@ import { CURRENT_SELECTED_GROUP, CURRENT_SELECTED_GROUP_ID, GROUPS_QUERY, GROUPS
 // import { store } from "../store";
 
 
-const groupsQueryAction = (query: string) => ({
+export const groupsQueryAction = (query: string) => ({
     type: GROUPS_QUERY,
     payload:query,
 });
 
 
-const groupsQueryCompletedAction = (query: string, groups: Group[]) => ({
+export const groupsQueryCompletedAction = (query: string, groups: Group[]) => ({
     type: GROUPS_QUERY_COMPLETED,
     payload: { query, groups },
 });
