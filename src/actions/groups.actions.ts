@@ -2,7 +2,8 @@
 import { bindActionCreators } from "redux";
 import { Group } from "../models/Group";
 import { store } from "../store";
-import { CURRENT_SELECTED_GROUP, CURRENT_SELECTED_GROUP_ID, GROUPS_QUERY, GROUPS_QUERY_COMPLETED } from "./actions.constants";
+import { CURRENT_SELECTED_GROUP, CURRENT_SELECTED_GROUP_ID, GROUPS_QUERY } from "./actions.constants";
+import { groupsQueryCompletedAction } from "./cdremovegroupquerycompletedaction";
 // import { store } from "../store";
 
 
@@ -12,10 +13,10 @@ export const groupsQueryAction = (query: string) => ({
 });
 
 
-export const groupsQueryCompletedAction = (query: string, groups: Group[]) => ({
-    type: GROUPS_QUERY_COMPLETED,
-    payload: { query, groups },
-});
+// export const groupsQueryCompletedAction = (query: string, groups: Group[]) => ({
+//     type: GROUPS_QUERY_COMPLETED,
+//     payload: { query, groups },
+// });
 
 
 const currentSelectedGroupAction = (id: number) => ({

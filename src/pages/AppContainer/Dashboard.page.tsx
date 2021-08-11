@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 // import { Link } from "react-router-dom";
 // import { isTypeNode } from "typescript";
-import { fetchGroups } from "../../middlewares/groups.middleware";
+// import { fetchGroups } from "../../middlewares/groups.middleware";
 // import logo from "../logonew.svg";
 // import { FaUserCircle, FaSpinner } from 'react-icons/fa';
 import { AiOutlineSearch } from 'react-icons/ai';
@@ -15,6 +15,7 @@ import { useAppSelector } from "../../store";
 // import { groupActions } from "../../actions/groups.actions";
 import { groupQuerySelector, groupsLoadingSelector, groupsSelector } from "../../selectors/groups.selectors";
 import { FaSpinner } from "react-icons/fa";
+import { groupActions } from "../../actions/groups.actions";
 
 // interface Results {
 //     gender: string;
@@ -93,7 +94,7 @@ const Dashboard: React.FC<Props> = () => {
                         <div className="ml-64 border-b-2 border-gray-600">
                             <AiOutlineSearch className="inline w-5 h-6 mr-12" />
                             <input value={query} onChange={(event) => {
-                                fetchGroups({ query: event.target.value, status: "all-groups" })
+                                groupActions.query(event.target.value)
                             }} className="w-64 outline-none " placeholder="Search group here"></input>
                             {loading&&<FaSpinner className="mt-4 animate-spin" />}
                         </div>
