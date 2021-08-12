@@ -132,7 +132,7 @@ const Dashboard: React.FC<Props> = () => {
                             </div>
                         )
                     }
-                })}{!loading && groups.length === 0 && "no data"}
+                })}<div className="ml-96">{!loading && groups.length === 0 && "No data"}</div>
                 <Button onChange={() => setOffset(offset + 40)}>Change</Button>
             </div>
         </>
