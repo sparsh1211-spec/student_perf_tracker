@@ -1,6 +1,6 @@
 import { CancelToken} from "axios";
 import { Group } from "../models/Group";
-import { get } from "./base";
+import { BASE_URL, get } from "./base";
 
 
 
@@ -27,14 +27,13 @@ export interface GroupRequest {
 //             console.log(response.data.group_image_url);
 //             return response.data.group_image_url;
 //         });
-
-export const fetchGroups = (data: GroupRequest,token?:CancelToken) =>{
-    return get<GroupResponse>("https://api-dev.domecompass.com/groups", 
-    { params: data, cancelToken:token, headers: { Authorization: localStorage.getItem("auth_token") } })
-    .then((response) =>{
-        console.log(response.data.data)
-        return response.data.data;
-    })
-}
-
-        
+export const fetchGroups = (
+    data?: GroupRequest,
+    token?: CancelToken
+) => {
+    const url = BASE_URL + "/groups";
+    return get<GroupResponse>(url, {
+        params: data ? data : { status: "all-groups" },
+        cancelToken: token,
+    });
+};

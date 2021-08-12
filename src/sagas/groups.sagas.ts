@@ -13,7 +13,7 @@ export function* fetchGroups(action: AnyAction): Generator<any> {
             query: action.payload,
             status: "all-groups"
         });
-    yield put(groupsQueryCompletedAction(action.payload,groupResponse))
+    yield put(groupsQueryCompletedAction(action.payload,groupResponse.data.data))
 };
 
 

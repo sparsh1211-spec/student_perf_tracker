@@ -30,7 +30,7 @@ export const fetchGroups = (request: GroupRequest) => {
 
 
     fetchGroupsAPI(request, token).then(groups => {
-        groupActions.queryCompleted(query, groups)
+        groupActions.queryCompleted(query, groups.data.data)
         canceler = undefined;
     });
 };
