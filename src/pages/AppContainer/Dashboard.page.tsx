@@ -15,7 +15,8 @@ import { useAppSelector } from "../../store";
 // import { groupActions } from "../../actions/groups.actions";
 import { groupQuerySelector, groupsLoadingSelector, groupsSelector } from "../../selectors/groups.selectors";
 import { FaSpinner } from "react-icons/fa";
-import { groupActions } from "../../actions/groups.actions";
+import { groupsQueryAction } from "../../actions/groups.actions";
+import { useDispatch } from "react-redux";
 
 // interface Results {
 //     gender: string;
@@ -42,7 +43,7 @@ const Dashboard: React.FC<Props> = () => {
     console.log("hello");
     // const [user, setUser] = useState<any[]>([])
     const groups = useAppSelector(groupsSelector);
-    // const dispatch=useDispatch();
+    const dispatch=useDispatch();
 
 
     // const [query, setQuery] = useState("");
@@ -94,7 +95,7 @@ const Dashboard: React.FC<Props> = () => {
                         <div className="ml-64 border-b-2 border-gray-600">
                             <AiOutlineSearch className="inline w-5 h-6 mr-12" />
                             <input value={query} onChange={(event) => {
-                                groupActions.query(event.target.value)
+                                dispatch(groupsQueryAction(event.target.value));
                             }} className="w-64 outline-none " placeholder="Search group here"></input>
                             {loading&&<FaSpinner className="mt-4 animate-spin" />}
                         </div>
