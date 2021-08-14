@@ -1,4 +1,4 @@
-import { CancelToken} from "axios";
+import axios from "axios";
 import { Group } from "../models/Group";
 import { BASE_URL, get } from "./base";
 
@@ -27,13 +27,21 @@ export interface GroupRequest {
 //             console.log(response.data.group_image_url);
 //             return response.data.group_image_url;
 //         });
+
+
 export const fetchGroups = (
-    data?: GroupRequest,
-    token?: CancelToken
+    data: GroupRequest,
 ) => {
     const url = BASE_URL + "/groups";
     return get<GroupResponse>(url, {
-        params: data ? data : { status: "all-groups" },
-        cancelToken: token,
+        params: data,
     });
+};
+
+
+export const fetchOneGroup = (
+    id: string,
+) => {
+    const url = BASE_URL + "/groups/" + id;
+    return axios.get<GroupResponse>(url);
 };

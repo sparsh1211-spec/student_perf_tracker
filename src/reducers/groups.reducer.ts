@@ -1,5 +1,5 @@
 import { Reducer } from "redux";
-import { CURRENT_SELECTED_GROUP, CURRENT_SELECTED_GROUP_ID, GROUPS_QUERY, GROUPS_QUERY_COMPLETED } from "../actions/actions.constants";
+import { CURRENT_SELECTED_GROUP, CURRENT_SELECTED_GROUP_COMPLETE, CURRENT_SELECTED_GROUP_ID, GROUPS_QUERY, GROUPS_QUERY_COMPLETED } from "../actions/actions.constants";
 import { Group } from "../models/Group";
 import { addMany, addOne, EntityState, getIds } from "./entity.reducer";
 
@@ -77,6 +77,9 @@ export const groupReducer: Reducer<GroupState> = (state = initialState, action) 
         case CURRENT_SELECTED_GROUP:
             const group: Group = action.payload as Group;
             return addOne(state, group) as GroupState;
+
+        case CURRENT_SELECTED_GROUP_COMPLETE:
+            return addOne(state,action.payload) as GroupState
         default:
             return state;
     }

@@ -1,11 +1,11 @@
 
 import React from "react";
-import { groupActions, groupsQueryAction } from "../../actions/groups.actions";
+import { groupsQueryAction } from "../../actions/groups.actions";
 // import { fetchGroups } from "../../middlewares/groups.middleware";
 import { groupsLoadingSelector, groupQuerySelector, groupsSelector } from "../../selectors/groups.selectors";
 import { useAppSelector } from "../../store";
 import { GoSearch } from "react-icons/go"
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { FaSpinner } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 
@@ -18,7 +18,7 @@ const Groups: React.FC<Props> = () => {
     const groups = useAppSelector(groupsSelector);
     const query = useAppSelector(groupQuerySelector);
     const loading = useAppSelector(groupsLoadingSelector);
-    const dispatch=useDispatch();
+    const dispatch = useDispatch();
 
 
     // useEffect(() => {
@@ -40,14 +40,11 @@ const Groups: React.FC<Props> = () => {
                     const itemnumber = index;
                     if (itemnumber % 2 === 0) {
                         return (
-                            <div onClick={() => {
-                               groupActions.selectedGroupId(item.id)
-                                history.push("/groups/" + item.id)
-                            }} className="pl-4 text-black bg-gray-400 cursor-pointer ">{item.name}</div>
+                            <div className="pl-4 text-black bg-gray-400 cursor-pointer "><Link to={"/groups/" + item.id}>{item.name}</Link></div>
                         );
                     }
                     return (<div onClick={() => {
-                        groupActions.selectedGroupId(item.id)
+                        // groupActions.selectedGroupId(item.id)
                         history.push("/groups/" + item.id)
                     }} className="pl-4 text-white bg-gray-800 cursor-pointer">{item.name}</div>)
                 })}{!loading && groups.length === 0 && "no data"}</div>

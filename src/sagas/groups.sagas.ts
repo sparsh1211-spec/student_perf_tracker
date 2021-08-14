@@ -1,8 +1,9 @@
-import { call, put, delay,takeLatest } from "@redux-saga/core/effects"
+import { call, put, delay, takeLatest, takeEvery, all } from "@redux-saga/core/effects"
 import { AnyAction } from "redux";
-import { GROUPS_QUERY } from "../actions/actions.constants";
-import { groupsQueryCompletedAction } from "../actions/cdremovegroupquerycompletedaction";
-import { fetchGroups as fetchGroupsApi } from "../api/groups";
+import { CURRENT_SELECTED_GROUP_ID, GROUPS_QUERY } from "../actions/actions.constants";
+import { currentSelectedGroupComplete, groupsQueryCompletedAction } from "../actions/cdremovegroupquerycompletedaction";
+// import { currentSelectedGroupAction } from "../actions/cdremovegroupquerycompletedaction";
+import { fetchGroups as fetchGroupsApi, fetchOneGroup } from "../api/groups";
 
 
 export function* fetchGroups(action: AnyAction): Generator<any> {
@@ -13,11 +14,16 @@ export function* fetchGroups(action: AnyAction): Generator<any> {
             query: action.payload,
             status: "all-groups"
         });
-    yield put(groupsQueryCompletedAction(action.payload,groupResponse.data.data))
+    yield put(groupsQueryCompletedAction(action.payload, groupResponse.data.data))
 };
+function* fetchOne(action: AnyAction): Generator<any> {
+    const res: any = yield call(fetchOneGroup, action.payload)
 
+    yield put(currentSelectedGroupComplete(res.data.data))
+}
 
 export function* watchGroupQueryChanged() {
     console.log("watchGroupQueryChanged called")
-    yield takeLatest(GROUPS_QUERY, fetchGroups)
+    yield all([takeLatest(GROUPS_QUERY, fetchGroups),
+    takeEvery(CURRENT_SELECTED_GROUP_ID, fetchOne)])
 }

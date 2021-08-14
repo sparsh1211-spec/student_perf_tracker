@@ -5,7 +5,8 @@ import Sidebar from "../../components/Sidebar";
 // import { User } from "../../models/User";
 import UserInformation from "../../UserInformation";
 import DashboardPage from "./Dashboard.page";
-import GroupPage from "./Group.page";
+// import GroupPage from "./Group.page";
+import GroupDetailsPage from "./GroupDetails.page";
 import GroupsPage from "./Groups.page";
 import LecturePage from "./Lecture.page";
 import RecordingsPage from "./Recordings.page";
@@ -30,7 +31,7 @@ const AppContainer: React.FC<Props>=() => {
             <GroupsPage/>
           </Route>
           <Route path="/groups/:id">
-            <GroupPage/>
+            <GroupDetailsPage/>
           </Route>
          <Route path="/recordings">
            <RecordingsPage/>

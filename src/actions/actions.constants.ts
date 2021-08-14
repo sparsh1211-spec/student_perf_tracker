@@ -11,4 +11,6 @@ export const SELECTED_GROUP_FETCHED="selected_group/fetched";
 
 export const  CURRENT_SELECTED_GROUP_ID="currentgroup/id";
 
-export const  CURRENT_SELECTED_GROUP="currentgroup"
+export const  CURRENT_SELECTED_GROUP="currentgroup";
+
+export const CURRENT_SELECTED_GROUP_COMPLETE="currentgroup/complete";
