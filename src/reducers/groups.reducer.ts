@@ -1,7 +1,7 @@
 import { Reducer } from "redux";
-import { CURRENT_SELECTED_GROUP, CURRENT_SELECTED_GROUP_COMPLETE, CURRENT_SELECTED_GROUP_ID, GROUPS_QUERY, GROUPS_QUERY_COMPLETED } from "../actions/actions.constants";
+import { CURRENT_SELECTED_GROUP_COMPLETE, CURRENT_SELECTED_GROUP_ID, GROUPS_QUERY, GROUPS_QUERY_COMPLETED, GROUP_FETCH_ONE, GROUP_FETCH_ONE_ERROR } from "../actions/actions.constants";
 import { Group } from "../models/Group";
-import { addMany, addOne, EntityState, getIds } from "./entity.reducer";
+import { addMany, addOne, EntityState, getIds, initialEntityState, select, setErrorForOne } from "./entity.reducer";
 
 export interface GroupState extends EntityState<Group> {
 
@@ -18,7 +18,7 @@ export interface GroupState extends EntityState<Group> {
 
 
 const initialState = {
-    byId: {},
+    ...initialEntityState,
     query: "",
     queryMap: {},
     loading:false,
@@ -27,10 +27,12 @@ const initialState = {
 export const groupReducer: Reducer<GroupState> = (state = initialState, action) => {
 
     switch (action.type) {
+        case GROUP_FETCH_ONE:
+            return select(state,action.payload) as GroupState
         case GROUPS_QUERY:
             const query = action.payload;
             return {
-                ...state, query: query, loading:true
+                ...state, query: query, loadingList:true
             };
 
         case GROUPS_QUERY_COMPLETED:
@@ -45,10 +47,10 @@ export const groupReducer: Reducer<GroupState> = (state = initialState, action) 
                     ...newState.queryMap,
                     [action.payload.query]: groupIds
                 },
-                loading:false
+                loadingList:false
             };
         case CURRENT_SELECTED_GROUP_ID:
-            const id = action.payload as number;
+            let id = action.payload as number;
             if (state.currentSelectedGroupId === id) return state;
 
             const currentQuerryGroups = state.queryMap[state.query];
@@ -74,12 +76,15 @@ export const groupReducer: Reducer<GroupState> = (state = initialState, action) 
                     prevGroupId: prevId,
                 };
             }
-        case CURRENT_SELECTED_GROUP:
-            const group: Group = action.payload as Group;
-            return addOne(state, group) as GroupState;
+        // case CURRENT_SELECTED_GROUP:
+        //     const group: Group = action.payload as Group;
+        //     return addOne(state, group) as GroupState;
 
         case CURRENT_SELECTED_GROUP_COMPLETE:
             return addOne(state,action.payload) as GroupState
+        case GROUP_FETCH_ONE_ERROR:
+            const {id2,msg}=action.payload;
+            return setErrorForOne(state,id2,msg) as GroupState
         default:
             return state;
     }

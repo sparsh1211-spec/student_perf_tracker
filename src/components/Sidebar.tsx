@@ -3,8 +3,6 @@
 import { Dialog, Transition } from "@headlessui/react";
 import React, { Fragment, useState } from "react";
 // import { useSelector } from "react-redux";
-
-
 import { FiChevronDown } from 'react-icons/fi';
 import { Link, NavLink, useHistory } from "react-router-dom";
 import { logout } from "../api/auth";
@@ -16,7 +14,6 @@ import Button from "./Button/Button";
 // import OutlineButton from "./Button/OutlineButton";
 
 interface Props {
-
 
 }
 
@@ -32,11 +29,6 @@ const Sidebar: React.FC<Props> = () => {
     const history = useHistory();
     return (
         <>
-
-
-
-
-
             <div className="h-screen bg-gray-200 border-r border-gray-300 w-96">
 
                 <div className="">
@@ -61,16 +53,7 @@ const Sidebar: React.FC<Props> = () => {
                                          </Transition.Child>
                                  </Dialog>
                              </Transition.Root>
-
-                                    
-                            
                             </div>
-
-
-
-
-
-
 
                 {/* <img className="w-24 h-24 rounded-full" src={user!.profile_pic_url} alt="hello"></img>
                 <span className="text-2xl font-semibold text-white">Welcome {user!.first_name} {user!.middle_name} {user!.last_name} </span>
@@ -78,14 +61,6 @@ const Sidebar: React.FC<Props> = () => {
 
                 {/* <button className="items-center justify-center w-56 p-2 text-center bg-white border-2 rounded-lg shadow-md"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="inline w-4 h-4 mr-2 feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg><span className="mr-2 text-sm font-semibold tracking-widest text-gray-700">Dashboard</span><AiOutlineDown className="inline w-3 h-3" onClick={isAnimating ? undefined : () => setIsMenuOpen((open) => !open)} /></button>
  */}
-
-
-
-
-
-
-
-
 
                 {/* 
 
@@ -114,10 +89,9 @@ const Sidebar: React.FC<Props> = () => {
                 }}>Logout</Button>
 
                 <NavLink to="/groups" className="block p-1 pl-2 mb-4 ml-20 text-white bg-gray-600 border border-black rounded-full w-44 hover:opacity-50"  activeClassName="hidden">GO TO GROUPS PAGE</NavLink>
+                <NavLink to="/peoples" className="block p-1 pl-2 mb-4 ml-20 text-white bg-gray-600 border border-black rounded-full w-44 hover:opacity-50"  activeClassName="hidden">GO TO Peoples page</NavLink>
                 <Link to="/recordings" className="p-2 ml-20 text-white bg-gray-600">Go to recordings page</Link>
             </div>
-
-
         </>
     );
 

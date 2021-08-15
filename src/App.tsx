@@ -84,6 +84,8 @@ const App: React.FC<Props> = (props) => {
           <Route path={["/dashboard",
             "/recordings",
             "/usersettings",
+            "/peoples",
+            "/peoples/:id",
             "/groups",
             "/groups/:id",
             "/batch/:batchNumber/lecture/:lectureNumber"

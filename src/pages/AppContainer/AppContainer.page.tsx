@@ -9,6 +9,8 @@ import DashboardPage from "./Dashboard.page";
 import GroupDetailsPage from "./GroupDetails.page";
 import GroupsPage from "./Groups.page";
 import LecturePage from "./Lecture.page";
+import PeopleDetailsPage from "./PeopleDetails.page";
+import PeoplesPage from "./Peoples.page";
 import RecordingsPage from "./Recordings.page";
 
 interface Props{
@@ -30,8 +32,14 @@ const AppContainer: React.FC<Props>=() => {
           <Route path="/groups" exact>
             <GroupsPage/>
           </Route>
+          <Route path="/peoples" exact>
+            <PeoplesPage/>
+          </Route>
           <Route path="/groups/:id">
             <GroupDetailsPage/>
+          </Route>
+          <Route path="/peoples/:id">
+            <PeopleDetailsPage/>
           </Route>
          <Route path="/recordings">
            <RecordingsPage/>

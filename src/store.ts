@@ -6,6 +6,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 // import { User } from "./models/User";
 import { authReducer } from "./reducers/auth.reducer";
 import { groupReducer} from "./reducers/groups.reducer";
+import { peopleReducer } from "./reducers/peoples.reducer";
 import { userReducer} from "./reducers/users.reducer";
 import { sagaMiddleware } from "./sagas";
 import { watchGroupQueryChanged } from "./sagas/groups.sagas";
@@ -33,6 +34,7 @@ const reducer=combineReducers({
     users:userReducer,
     groups:groupReducer,
     auth:authReducer,
+    peoples:peopleReducer,
 });
 
 // const reducer: Reducer<AppState, AnyAction> = (state = initialState, action) => {
