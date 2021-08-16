@@ -5,6 +5,7 @@ import { FaSpinner } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { currentSelectedGroupAction } from "../../actions/cdremovegroupquerycompletedaction";
+import Alert from "../../components/Alert/Alert";
 import { groupByIdSelector, selectedErrorSelector} from "../../selectors/groups.selectors";
 import { useAppSelector } from "../../store";
 
@@ -31,9 +32,7 @@ const GroupDetails: React.FC<Props>=(props) => {
         console.log(error);
         return (
             <>
-            <div>{error}</div>
-            
-            <div><Link to={"/groups/" + (id+1)} className="text-green-600 underline">Next</Link></div>
+           <Alert className="justify-center w-full h-24 text-3xl font-bold text-center" theme="danger">{error + " Please try searching with a different ID. " }</Alert>
             </>
         )
     }

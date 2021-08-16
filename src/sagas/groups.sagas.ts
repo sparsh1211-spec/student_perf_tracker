@@ -27,10 +27,7 @@ function* fetchOne(action: AnyAction): Generator<any> {
         console.log(e);
         const error = e.response.data?.message || "kuch toh gadbad hain daya";
         yield put(fetchOneGroupError(action.payload, error));
-
     }
-
-
 }
 
 function* fetchOneUser(action:AnyAction):Generator<any>{

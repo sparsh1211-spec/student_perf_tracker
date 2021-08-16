@@ -1,6 +1,7 @@
 
 import React, { useEffect } from "react";
-import { AiOutlineLoading3Quarters } from 'react-icons/ai';
+// import { AiOutlineLoading3Quarters } from 'react-icons/ai';
+// import { ImSpinner2 } from "react-icons/im"
 // import AppContext from "./App.context";
 import {
   Switch,
@@ -25,6 +26,7 @@ import { useAppSelector } from "./store";
 // import { useDispatch } from "react-redux";
 // import { authActions } from "./actions/auth.actions";
 import { meSelector } from "./selectors/auth.selectors";
+import { FaSpinner } from "react-icons/fa";
 // import { User } from "./models/User";
 // import UserInformation from "./UserInformation";
 // import Sidebar from "./components/Sidebar";
@@ -66,9 +68,15 @@ const App: React.FC<Props> = (props) => {
   }, [])//eslint-disable-line react-hooks/exhaustive-deps
 
   console.log("App rerendering and token is: " + token);
-
-  if (!user && token) {
-    return <div className="h-screen bg-blue-300"><AiOutlineLoading3Quarters className="text-blue-600 h-96 w-96 animate-spin ml-96"/></div>
+  if (token && !user) {
+    return (<div className="relative flex flex-col items-center justify-center h-screen bg-black">
+     <FaSpinner className="absolute w-10 h-10 text-white animate-spin " />
+     <FaSpinner className="absolute text-white animate-spin w-14 h-14 " />
+     <FaSpinner className="absolute w-20 h-20 text-white animate-spin" />
+     <FaSpinner className="absolute w-24 h-24 text-white animate-spin" />
+     <FaSpinner className="absolute w-32 h-32 text-white animate-spin" />
+     <FaSpinner className="absolute text-white animate-spin w-36 h-36" />
+    </div>);
   }
   return (
     <>
@@ -79,7 +87,14 @@ const App: React.FC<Props> = (props) => {
             {user ? <Redirect to="/dashboard" /> : <Redirect to="/auth/login" />}
           </Route>
           <Route path="/auth">
-            {user ? (<Redirect to="/dashboard" />) : (<Suspense fallback={<div className="text-red-500 bg-blue-300">Loading....<AiOutlineLoading3Quarters className="animate-spin" /></div>}> <AuthLazy /></Suspense>)}
+            {user ? (<Redirect to="/dashboard" />) : (<Suspense fallback={(<div className="relative flex flex-col items-center justify-center h-screen bg-black">
+     <FaSpinner className="absolute w-10 h-10 text-white animate-spin " />
+     <FaSpinner className="absolute text-white animate-spin w-14 h-14 " />
+     <FaSpinner className="absolute w-20 h-20 text-white animate-spin" />
+     <FaSpinner className="absolute w-24 h-24 text-white animate-spin" />
+     <FaSpinner className="absolute w-32 h-32 text-white animate-spin" />
+     <FaSpinner className="absolute text-white animate-spin w-36 h-36" />
+    </div>)}> <AuthLazy /></Suspense>)}
           </Route>
           <Route path={["/dashboard",
             "/recordings",
@@ -92,7 +107,14 @@ const App: React.FC<Props> = (props) => {
           ]} exact>
             <Nav />
             <Header />
-            <Suspense fallback={<div className="text-red-500">Loading....<AiOutlineLoading3Quarters className="animate-spin"></AiOutlineLoading3Quarters></div>}>
+            <Suspense fallback={(<div className="relative flex flex-col items-center justify-center h-screen bg-black">
+     <FaSpinner className="absolute w-10 h-10 text-white animate-spin " />
+     <FaSpinner className="absolute text-white animate-spin w-14 h-14 " />
+     <FaSpinner className="absolute w-20 h-20 text-white animate-spin" />
+     <FaSpinner className="absolute w-24 h-24 text-white animate-spin" />
+     <FaSpinner className="absolute w-32 h-32 text-white animate-spin" />
+     <FaSpinner className="absolute text-white animate-spin w-36 h-36" />
+    </div>)}>
               {user ? (<AppContainerPageLazy />) : (<Redirect to="/auth/login" />)}
             </Suspense>
           </Route>

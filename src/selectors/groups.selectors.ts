@@ -73,13 +73,14 @@ export const groupsSelector = createSelector(
         const groups = groupsIds.map((id) => byId[id]);
         return groups;
     })
-
-// export const peoplesSelector = createSelector(
-//     [peopleByIdSelector,
-//         peopleMapSelector,
-//     ],(byId, map)=>{const peoples=byId.map((id)=>byId[id])
-
-// }
+    // export const usersArrSelector = createSelector(
+    //     [peopleByIdSelector,peopleMapSelector],
+    //     (byId, id) =>{
+    //         return byId.map((id:any) =>{
+    //             return byId[id]
+    //         })
+    //     }
+    // )
 
 export const currentSelectedGroupIdSelector = createSelector(
     [groupsStateSelector],
