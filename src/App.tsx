@@ -80,7 +80,6 @@ const App: React.FC<Props> = (props) => {
   }
   return (
     <>
-
       <BrowserRouter>
         <Switch>
           <Route path="/" exact>
@@ -126,7 +125,6 @@ const App: React.FC<Props> = (props) => {
           </Route>
         </Switch>
       </BrowserRouter>
-
     </>
   );
 

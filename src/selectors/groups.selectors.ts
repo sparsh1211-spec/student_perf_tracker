@@ -31,13 +31,14 @@ export const selectedIdSelector = createSelector([groupsStateSelector],
     (groupState) => groupState.selectedId)
 
 export const selectedGroupSelector = createSelector([groupByIdSelector, selectedIdSelector],
-    (byId, id) => id !== undefined && byId[id])
+    (byId, id) => id && byId[id])
 
 export const selectedErrorSelector = createSelector([groupsStateSelector],
     (groupState) => groupState.errorOne)
 
 export const selectedLoadingSelector = createSelector([groupsStateSelector],
     (groupState) => groupState.loadingOne)
+
 
 
 export const peopleByIdSelector = createSelector([peoplesStateSelector],

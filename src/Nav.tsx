@@ -19,7 +19,7 @@ const Nav: React.FC<Props> = (props) => {
         <>
             <div className="z-20 flex items-center h-16 text-center bg-black">
                 <img src={logo} className="w-10 h-10" alt="" />
-                <p className="text-3xl font-semibold text-white">CORK</p>
+                <p className="text-3xl font-semibold text-white">CODEYOGI</p>
                 <form>
                     <div className="flex items-center m-auto mt-3">
                         <div className="flex items-center justify-center ml-16">

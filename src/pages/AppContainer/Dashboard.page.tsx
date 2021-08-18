@@ -1,22 +1,23 @@
 
 // import { setupMaster } from "cluster";
-import React, { useState } from "react";
+import React from "react";
+import { useAppSelector } from "../../store";
 // import { Link } from "react-router-dom";
 // import { isTypeNode } from "typescript";
 // import { fetchGroups } from "../../middlewares/groups.middleware";
 // import logo from "../logonew.svg";
 // import { FaUserCircle, FaSpinner } from 'react-icons/fa';
-import { AiOutlineSearch } from 'react-icons/ai';
-import Button from '../../components/Button/Button'
+// import { AiOutlineSearch } from 'react-icons/ai';
+// import Button from '../../components/Button/Button'
 // import { Group } from "../../models/Group";
 // import { AppState } from "../../store";
 // import { useDispatch} from "react-redux";
-import { useAppSelector } from "../../store";
+// import { useAppSelector } from "../../store";
 // import { groupActions } from "../../actions/groups.actions";
-import { groupQuerySelector, groupsLoadingSelector, groupsSelector } from "../../selectors/groups.selectors";
-import { FaSpinner } from "react-icons/fa";
-import { groupsQueryAction } from "../../actions/groups.actions";
-import { useDispatch } from "react-redux";
+// import { groupQuerySelector, groupsLoadingSelector, groupsSelector } from "../../selectors/groups.selectors";
+// import { FaSpinner } from "react-icons/fa";
+// import { groupsQueryAction } from "../../actions/groups.actions";
+// import { useDispatch } from "react-redux";
 
 // interface Results {
 //     gender: string;
@@ -40,16 +41,16 @@ import { useDispatch } from "react-redux";
 // }
 interface Props { }
 const Dashboard: React.FC<Props> = () => {
-    console.log("hello");
-    // const [user, setUser] = useState<any[]>([])
-    const groups = useAppSelector(groupsSelector);
-    const dispatch=useDispatch();
+    // console.log("hello");
+    // // const [user, setUser] = useState<any[]>([])
+    // const groups = useAppSelector(groupsSelector);
+    // const dispatch=useDispatch();
 
 
-    // const [query, setQuery] = useState("");
-    const query = useAppSelector(groupQuerySelector);
-    const loading=useAppSelector(groupsLoadingSelector)
-    const [offset, setOffset] = useState(0);
+    // // const [query, setQuery] = useState("");
+    // const query = useAppSelector(groupQuerySelector);
+    // const loading=useAppSelector(groupsLoadingSelector)
+    // const [offset, setOffset] = useState(0);
 
     //  const [searchContent, setSearchContent] = useState("");
     //  const [group, setGroup] = useState<any[]>([]);
@@ -86,10 +87,14 @@ const Dashboard: React.FC<Props> = () => {
     //     setFilteredGroup(filtered);
     //     console.log(filtered);
     //  }, [searchContent,user]);
+    const userFirstName = useAppSelector((state) => state.users.byId[state.auth.id!].first_name);
+    const userMiddleName = useAppSelector((state) => state.users.byId[state.auth.id!].middle_name);
+    const userLastName = useAppSelector((state) => state.users.byId[state.auth.id!].last_name);
+    const userProfilePic = useAppSelector((state) => state.users.byId[state.auth.id!].profile_pic_url);
 
     return (
         <>
-        <div className="">
+            {/* <div className="">
                 <form>
                     <div className="flex items-center mt-3 mb-12">
                         <div className="ml-64 border-b-2 border-gray-600">
@@ -134,6 +139,14 @@ const Dashboard: React.FC<Props> = () => {
                     }
                 })}<div className="ml-96">{!loading && groups.length === 0 && "No data"}</div>
                 <Button onChange={() => setOffset(offset + 40)}>Change</Button>
+            </div> */}
+            <div className="flex flex-col text-3xl font-bold text-gray-600">
+                <div>THIS IS DASHBOARD PAGE</div>
+                <div className="flex flex-row items-center justify-center text-center">
+                    <div>Welcome</div>
+                    <div> <img className="w-12 h-12 m-4 rounded-full" src={userProfilePic} alt="" onError={(e: any) => { e.target.onerror = null; e.target.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSk6qxRGXu9_Mou7APQCryC7T3F7s_YXmCSWQ&usqp=CAU" }} /></div>
+                    <div>{userFirstName + " " + userMiddleName + " " + userLastName}</div>
+                </div>
             </div>
         </>
     );
