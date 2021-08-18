@@ -40,7 +40,6 @@ export const selectedLoadingSelector = createSelector([groupsStateSelector],
     (groupState) => groupState.loadingOne)
 
 
-
 export const peopleByIdSelector = createSelector([peoplesStateSelector],
     (peopleState) => peopleState.byId);
 
