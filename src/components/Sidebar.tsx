@@ -23,8 +23,8 @@ const Sidebar: React.FC<Props> = () => {
     // const user = useSelector<AppState, User | undefined>((state) => state.me);
     // const dispatch = useDispatch();
 
-     const [isMenuOpen, setIsMenuOpen] = useState(false);
-     const [isAnimating, setIsAnimating] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isAnimating, setIsAnimating] = useState(false);
 
     const history = useHistory();
     return (
@@ -32,8 +32,8 @@ const Sidebar: React.FC<Props> = () => {
             <div className="h-screen bg-gray-200 border-r border-gray-300 w-96">
 
                 <div className="">
-                            <Link to="/dashboard"><button  className="flex items-center h-10 mt-4 ml-12 space-x-8 text-xs font-bold tracking-widest text-center text-gray-600 bg-gray-100 border rounded-md shadow-md w-60 hover:bg-gray-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="inline m-4 feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>Dashboard<FiChevronDown  onClick={isAnimating ? undefined : () => setIsMenuOpen((open) => !open)}  className="inline w-4 h-4"  /></button></Link>
-                            
+                    <Link to="/dashboard"><button className="flex items-center h-10 mt-4 ml-12 space-x-8 text-xs font-bold tracking-widest text-center text-gray-600 bg-gray-100 border rounded-md shadow-md w-60 hover:bg-gray-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="inline m-4 feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>Dashboard<FiChevronDown onClick={isAnimating ? undefined : () => setIsMenuOpen((open) => !open)} className="inline w-4 h-4" /></button></Link>
+
                     <Transition.Root show={isMenuOpen} as={Fragment}
                         beforeLeave={() => setIsAnimating(true)}
                         afterLeave={() => setIsAnimating(false)}
@@ -49,11 +49,11 @@ const Sidebar: React.FC<Props> = () => {
                                 <div className="absolute flex flex-col justify-start space-y-4 text-left text-gray-500 ease-in-out transform top-44 left-24 bg-gray items-left">
                                     <button><ul><li className="text-sm font-semibold tracking-wider list-disc hover:text-blue-600 ">Sales</li>
                                         <li className="text-sm font-semibold tracking-wider list-disc hover:text-blue-600 ">Analytics</li></ul></button></div>
-                                         
-                                         </Transition.Child>
-                                 </Dialog>
-                             </Transition.Root>
-                            </div>
+
+                            </Transition.Child>
+                        </Dialog>
+                    </Transition.Root>
+                </div>
 
                 {/* <img className="w-24 h-24 rounded-full" src={user!.profile_pic_url} alt="hello"></img>
                 <span className="text-2xl font-semibold text-white">Welcome {user!.first_name} {user!.middle_name} {user!.last_name} </span>
@@ -83,14 +83,19 @@ const Sidebar: React.FC<Props> = () => {
                                          </Transition.Child>
                                  </Dialog>
                              </Transition.Root>
-         */} <Button className="m-24" theme="dark" onClick={() => {
+         */}
+                <div className="flex flex-col ml-24 space-y-4 text-lg font-semibold text-indigo-700 mt-36 ">
+
+                    <NavLink to="/groups" className="underline" activeClassName="text-indigo-800 font-bold">Groups Page</NavLink>
+                    <NavLink to="/peoples" className="underline" activeClassName="text-indigo-800 font-bold" >Users Page</NavLink>
+                    <NavLink to="/recordings" className="underline" activeClassName="text-indigo-800 font-bold " >Recordings page</NavLink>
+                    <NavLink to="/batch/:batchNumber/lecture/:lectureNumber" className="underline" activeClassName="text-indigo-800 font-bold">Lectures Page</NavLink>
+                </div>
+                <Button className="m-24" theme="dark" onClick={() => {
                     logout();
                     history.push("/auth/login");
                 }}>Logout</Button>
 
-                <NavLink to="/groups" className="block p-1 pl-2 mb-4 ml-20 text-white bg-gray-600 border border-black rounded-full w-44 hover:opacity-50"  activeClassName="hidden">GO TO GROUPS PAGE</NavLink>
-                <NavLink to="/peoples" className="block p-1 pl-2 mb-4 ml-20 text-white bg-gray-600 border border-black rounded-full w-44 hover:opacity-50"  activeClassName="hidden">GO TO Peoples page</NavLink>
-                <Link to="/recordings" className="p-2 ml-20 text-white bg-gray-600">Go to recordings page</Link>
             </div>
         </>
     );

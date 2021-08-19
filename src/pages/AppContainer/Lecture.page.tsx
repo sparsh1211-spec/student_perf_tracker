@@ -11,7 +11,7 @@ const Lecture: React.FC<Props>=(props) => {
     
     return (
         <div>
-            Showing data of lecture #{lectureNumber} of batch #{batchNumber}
+            Showing data of lecture {lectureNumber} of batch {batchNumber}
         </div>
     );
 
