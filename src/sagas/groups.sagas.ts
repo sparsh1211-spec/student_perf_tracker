@@ -1,11 +1,14 @@
 import { call, put, delay, takeLatest, takeEvery, all } from "@redux-saga/core/effects"
+import { normalize } from "normalizr";
 import { AnyAction } from "redux";
 import { CURRENT_SELECTED_GROUP_ID, CURRENT_SELECTED_PEOPLE_ID, GROUPS_QUERY } from "../actions/actions.constants";
 import { currentSelectedGroupComplete, fetchOneGroupError, groupsQueryCompletedAction } from "../actions/cdremovegroupquerycompletedaction";
 import { currentSelectedPeopleAction } from "../actions/cdremovepeople";
+import { fetchPeoplesCompletedAction } from "../actions/cdremovepeople";
 // import { currentSelectedGroupAction } from "../actions/cdremovegroupquerycompletedaction";
 import { fetchGroups as fetchGroupsApi, fetchOneGroup } from "../api/groups";
 import { fetchOnePeople } from "../api/individualpeople";
+import { groupSchema } from "../models/schemas";
 
 
 export function* fetchGroups(action: AnyAction): Generator<any> {
@@ -16,7 +19,10 @@ export function* fetchGroups(action: AnyAction): Generator<any> {
             query: action.payload,
             status: "all-groups"
         });
-    yield put(groupsQueryCompletedAction(action.payload, groupResponse.data.data))
+
+    const data=normalize(groupResponse.data.data,[groupSchema]);
+    yield put(groupsQueryCompletedAction(action.payload, data.entities.groups as any));
+    yield put(fetchPeoplesCompletedAction( data.entities.users as any));
 };
 function* fetchOne(action: AnyAction): Generator<any> {
 
@@ -25,7 +31,7 @@ function* fetchOne(action: AnyAction): Generator<any> {
         yield put(currentSelectedGroupComplete(res.data.data))
     } catch (e) {
         console.log(e);
-        const error = e.response.data?.message || "kuch toh gadbad hain daya";
+        const error = e.response?.data?.message || "kuch toh gadbad hain daya";
         yield put(fetchOneGroupError(action.payload, error));
     }
 }

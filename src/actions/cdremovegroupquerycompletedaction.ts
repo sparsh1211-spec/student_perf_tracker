@@ -1,9 +1,9 @@
 import { Group } from "../models/Group";
 import { CURRENT_SELECTED_GROUP, CURRENT_SELECTED_GROUP_COMPLETE, CURRENT_SELECTED_GROUP_ID, GROUPS_QUERY_COMPLETED, GROUP_FETCH_ONE_ERROR } from "./actions.constants";
 
-export const groupsQueryCompletedAction = (query: string, groups: Group[]) => ({
+export const groupsQueryCompletedAction = (query: string, groupsById: {[id:number]:Group}) => ({
     type: GROUPS_QUERY_COMPLETED,
-    payload: { query, groups },
+    payload: { query, groupsById },
 });
 
 

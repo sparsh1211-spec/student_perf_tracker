@@ -2,6 +2,7 @@ import { createSelector } from "reselect";
 // import { AppState } from "../store";
 // import { AppState } from "../store";
 import { groupsStateSelector, peoplesStateSelector } from "./app.selectors";
+import { usersByIdSelector } from "./users.selectors";
 
 // export const groupQuerySelector = (state: AppState) => {
 //     const groupState = groupStateSelector(state);
@@ -48,6 +49,40 @@ export const peopleMapSelector = createSelector([peoplesStateSelector],
     (peopleState) => peopleState.queryMap)
 
 
+export const groupIdSelector = createSelector([groupsStateSelector], (groupState) => {
+
+    return groupState.selectedId;
+});
+
+
+export const groupInvMemByIdSelector = createSelector([groupsStateSelector], (state) => state.invitedMembers);
+export const groupInvMemSelector = createSelector([groupInvMemByIdSelector, groupIdSelector, usersByIdSelector], (memById, gid, usersById) => {
+    const invMemIds = memById[gid!];
+    if (invMemIds === undefined) {
+        return []
+    }
+    const invMembers = invMemIds.map((id) => id && usersById[id]);
+    return invMembers;
+})
+
+
+export const groupParticipantsByIdSelector = createSelector([groupsStateSelector], (state) => state.participants);
+export const groupParticipantsSelector = createSelector([groupParticipantsByIdSelector, groupIdSelector, usersByIdSelector], (parById, gid, userById) => {
+    const participantsIds = parById[gid!];
+    if (participantsIds === undefined) {
+        return [];
+    }
+    const participants = participantsIds.map((id) => id && userById[id]);
+    return participants;
+
+})
+
+export const groupCreatorByIdSelector = createSelector([groupsStateSelector], (state) => state.creators);
+export const groupCreatorIdSelector = createSelector([groupCreatorByIdSelector, selectedIdSelector], (byId, id) => id && byId[id]);
+export const groupCreatorSelector = createSelector([usersByIdSelector, groupCreatorIdSelector], (byId, id) => id && byId[id]);
+
+
+
 //  export const groupLoadingSelector = createSelector([groupQuerySelector, groupQueryLoadingSelector],
 //  (query, loadingMap) => loadingMap[query])
 
@@ -73,14 +108,14 @@ export const groupsSelector = createSelector(
         const groups = groupsIds.map((id) => byId[id]);
         return groups;
     })
-    // export const usersArrSelector = createSelector(
-    //     [peopleByIdSelector,peopleMapSelector],
-    //     (byId, id) =>{
-    //         return byId.map((id:any) =>{
-    //             return byId[id]
-    //         })
-    //     }
-    // )
+// export const usersArrSelector = createSelector(
+//     [peopleByIdSelector,peopleMapSelector],
+//     (byId, id) =>{
+//         return byId.map((id:any) =>{
+//             return byId[id]
+//         })
+//     }
+// )
 
 export const currentSelectedGroupIdSelector = createSelector(
     [groupsStateSelector],

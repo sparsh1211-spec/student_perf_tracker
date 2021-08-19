@@ -1,18 +1,10 @@
 import { bindActionCreators } from "redux";
 import { People } from "../models/People";
+import { User } from "../models/User";
 import { store } from "../store";
 import { CURRENT_SELECTED_PEOPLE_COMPLETE, FETCH_PEOPLES, FETCH_PEOPLES_COMPLETE } from "./actions.constants";
+import { fetchPeoplesAction, fetchPeoplesCompletedAction } from "./cdremovepeople";
 
-export const fetchPeoplesAction=(id:number)=>({
-    type:FETCH_PEOPLES,
-    payload:id
-})
-
-
-export const fetchPeoplesCompletedAction = (peoples: People[]) => ({
-    type: FETCH_PEOPLES_COMPLETE,
-    payload: peoples,
-});
 
 
 // export const currentSelectedPeopleAction = (id: number) => ({

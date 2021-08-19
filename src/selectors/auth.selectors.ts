@@ -5,7 +5,8 @@ import { usersByIdSelector } from "./users.selectors";
 
 // export const meSelector = (state: AppState) => state.auth.id && state.users.byId[state.auth.id];
 
-const meIdSelector=createSelector([authStateSelector],(authState)=>authState.id);
+const meIdSelector = createSelector([authStateSelector], (authState) => authState.id);
 
-export const meSelector=createSelector([meIdSelector,usersByIdSelector],(id,usersById)=>id&&usersById[id])
+export const meSelector = createSelector([meIdSelector, usersByIdSelector],
+    (id, usersById) => id === undefined ? undefined : usersById[id])
 
