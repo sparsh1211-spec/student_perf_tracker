@@ -88,7 +88,7 @@ const Sidebar: React.FC<Props> = () => {
 
                     <NavLink to="/groups" className="underline" activeClassName="text-indigo-800 font-bold">Groups Page</NavLink>
                     <NavLink to="/peoples" className="underline" activeClassName="text-indigo-800 font-bold" >Users Page</NavLink>
-                    <NavLink to="/recordings" className="underline" activeClassName="text-indigo-800 font-bold " >Recordings page</NavLink>
+                    <NavLink to="/recordings" className="underline" activeClassName="text-indigo-800 font-bold " >Recordings Page</NavLink>
                     <NavLink to="/batch/:batchNumber/lecture/:lectureNumber" className="underline" activeClassName="text-indigo-800 font-bold">Lectures Page</NavLink>
                 </div>
                 <Button className="m-24" theme="dark" onClick={() => {

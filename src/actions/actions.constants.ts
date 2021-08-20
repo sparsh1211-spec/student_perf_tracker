@@ -33,3 +33,4 @@ export const FETCH_ONE_USER ="user/user_fetch";
 export const FETCH_ONE_USER_COMPLETED = "user/user_fetch_completed";
 export const FETCH_ONE_USER_ERROR = "user/user_fetch_error";
 export const FETCH_PEOPLE ="fetch/people";
+export const USER_LIST_RECIEVED="users/list_recieved";

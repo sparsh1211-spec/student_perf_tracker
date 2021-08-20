@@ -1,8 +1,8 @@
 import { Reducer } from "redux";
-import { FETCH_PEOPLES_COMPLETE, ME_FETCH, ME_LOGIN } from "../actions/actions.constants";
+import { ME_FETCH, ME_LOGIN, USER_LIST_RECIEVED } from "../actions/actions.constants";
 // import { Group } from "../models/Group";
 import { User } from "../models/User";
-import {  addOne, EntityState, initialEntityState } from "./entity.reducer";
+import { addOne, EntityState, initialEntityState } from "./entity.reducer";
 
 export interface UserState extends EntityState<User> {
     joinedgroups?: {
@@ -52,12 +52,11 @@ export const userReducer: Reducer<UserState> = (state = initialState, action) =>
         //       return {...prevMem, [currMem.id]:currMem};
         //   },{});
 
-           
+
         //   return  {...state, byId:{...state.byId, [creator.id]: creator, ...participantsById, ...invitedMembersById}};    
         // }
-        case FETCH_PEOPLES_COMPLETE:{
-            return {...state,byId:{...state.byId,...action.payload}}
-
+        case USER_LIST_RECIEVED: {
+            return { ...state, byId: { ...state.byId, ...action.payload } }
         }
         default:
             return state;

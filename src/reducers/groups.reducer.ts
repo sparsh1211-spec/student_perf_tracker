@@ -1,9 +1,9 @@
 // import { normalize } from "normalizr";
-import { normalize } from "normalizr";
+// import { normalize } from "normalizr";
 import { Reducer } from "redux";
-import { CURRENT_SELECTED_GROUP_COMPLETE, GROUPS_QUERY, GROUPS_QUERY_COMPLETED, GROUP_FETCH_ONE, GROUP_FETCH_ONE_ERROR } from "../actions/actions.constants";
+import { CURRENT_SELECTED_GROUP_COMPLETE, CURRENT_SELECTED_GROUP_ID, GROUPS_QUERY, GROUPS_QUERY_COMPLETED, GROUP_FETCH_ONE, GROUP_FETCH_ONE_ERROR } from "../actions/actions.constants";
 import { Group } from "../models/Group";
-import { groupSchema } from "../models/schemas";
+// import { groupSchema } from "../models/schemas";
 // import { groupSchema } from "../models/schemas";
 import { EntityState, initialEntityState, select, setErrorForOne } from "./entity.reducer";
 
@@ -83,8 +83,19 @@ export const groupReducer: Reducer<GroupState> = (state = initialState, action) 
       //     [group.id]: invitedMembersIds,
       //   },
       // };
-      const data = normalize(action.payload, groupSchema);
-      return { ...state, byId: { ...state.byId, ...data.entities.groups } }
+      // const data = normalize(action.payload, groupSchema);
+      const group=action.payload[state.currentSelectedGroupId!] as Group
+      console.log(action.payload)
+      const creators=group.creator as any
+      const invited=group.invitedMembers as any
+      const participants=group.participants as any
+      console.log(creators,invited,participants)
+      return { ...state, byId: { ...state.byId, ...action.payload },creators:{...state.creators,[group.id]:creators},participants:{...state.participants,[group.id]:participants},invitedMembers:{...state.invitedMembers,[group.id]:invited} }
+    }
+
+    case CURRENT_SELECTED_GROUP_ID:{
+      return {...state,currentSelectedGroupId:action.payload
+      }
     }
     case GROUP_FETCH_ONE_ERROR:
       const { id2, msg } = action.payload;

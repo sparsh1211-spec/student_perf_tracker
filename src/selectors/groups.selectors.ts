@@ -29,10 +29,59 @@ export const groupsLoadingSelector = createSelector([groupsStateSelector],
     (groupState) => groupState.loadingList)
 
 export const selectedIdSelector = createSelector([groupsStateSelector],
-    (groupState) => groupState.selectedId)
+    (groupState) => groupState.currentSelectedGroupId)
 
-export const selectedGroupSelector = createSelector([groupByIdSelector, selectedIdSelector],
-    (byId, id) => id && byId[id])
+
+export const groupCreatorByIdSelector = createSelector([groupsStateSelector], (state) => state.creators);
+export const groupCreatorIdSelector = createSelector([groupCreatorByIdSelector, selectedIdSelector], (byId, id) => id && byId[id]);
+export const groupCreatorSelector = createSelector([usersByIdSelector, groupCreatorIdSelector], (byId, id) => id===undefined ?undefined: byId[id]);
+
+export const groupIdSelector = createSelector([groupsStateSelector], (groupState) => {
+
+    return groupState.selectedId;
+});
+
+
+
+export const groupInvMemByIdSelector = createSelector([groupsStateSelector], (state) => state.invitedMembers);
+export const groupInvMemSelector = createSelector([groupInvMemByIdSelector, groupIdSelector, usersByIdSelector], (memById, gid, usersById) => {
+    const invMemIds = memById[gid!];
+    if (invMemIds === undefined) {
+        return []
+    }
+    const invMembers = invMemIds.map((id) => id && usersById[id]);
+    return invMembers;
+})
+
+
+
+export const groupParticipantsByIdSelector = createSelector([groupsStateSelector], (state) => state.participants);
+export const groupParticipantsSelector = createSelector([groupParticipantsByIdSelector, groupIdSelector, usersByIdSelector], (parById, gid, userById) => {
+    const participantsIds = parById[gid!];
+    if (participantsIds === undefined) {
+        return [];
+    }
+    const participants = participantsIds.map((id) => id && userById[id]);
+    return participants;
+
+})
+    
+
+export const selectedGroupSelector = createSelector([groupByIdSelector, selectedIdSelector, usersByIdSelector,groupCreatorSelector,groupParticipantsSelector,groupInvMemSelector],
+    (byId, id, usersById,creator,participants,invitedMembers) => {
+      
+        if (!id) {
+            return undefined;
+        }
+        const group = byId[id];
+
+        // let creator
+        // if(group.creator)
+        // creator= usersById[group.creator as any];
+        // const participants = group.participants.map((p: any) => usersById[p]);
+        // const invitedMembers = group.invitedMembers.map((m: any) => usersById[m]);
+        return { ...group,creator, participants, invitedMembers };
+    })
 
 export const selectedErrorSelector = createSelector([groupsStateSelector],
     (groupState) => groupState.errorOne)
@@ -49,37 +98,8 @@ export const peopleMapSelector = createSelector([peoplesStateSelector],
     (peopleState) => peopleState.queryMap)
 
 
-export const groupIdSelector = createSelector([groupsStateSelector], (groupState) => {
-
-    return groupState.selectedId;
-});
 
 
-export const groupInvMemByIdSelector = createSelector([groupsStateSelector], (state) => state.invitedMembers);
-export const groupInvMemSelector = createSelector([groupInvMemByIdSelector, groupIdSelector, usersByIdSelector], (memById, gid, usersById) => {
-    const invMemIds = memById[gid!];
-    if (invMemIds === undefined) {
-        return []
-    }
-    const invMembers = invMemIds.map((id) => id && usersById[id]);
-    return invMembers;
-})
-
-
-export const groupParticipantsByIdSelector = createSelector([groupsStateSelector], (state) => state.participants);
-export const groupParticipantsSelector = createSelector([groupParticipantsByIdSelector, groupIdSelector, usersByIdSelector], (parById, gid, userById) => {
-    const participantsIds = parById[gid!];
-    if (participantsIds === undefined) {
-        return [];
-    }
-    const participants = participantsIds.map((id) => id && userById[id]);
-    return participants;
-
-})
-
-export const groupCreatorByIdSelector = createSelector([groupsStateSelector], (state) => state.creators);
-export const groupCreatorIdSelector = createSelector([groupCreatorByIdSelector, selectedIdSelector], (byId, id) => id && byId[id]);
-export const groupCreatorSelector = createSelector([usersByIdSelector, groupCreatorIdSelector], (byId, id) => id && byId[id]);
 
 
 
@@ -141,4 +161,4 @@ export const groupPrevIdSelector = createSelector(
     (groupState) => {
         return groupState.prevGroupId;
     }
-);
+)
