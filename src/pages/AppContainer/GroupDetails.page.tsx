@@ -47,7 +47,7 @@ const GroupDetails: React.FC<Props> = (props) => {
         )
     }
     if(loading){
-        return <div className="z-30 m-40 text-2xl font-semibold text-red-600">LOADING REQUIRED GROUP...<FaSpinner className=" animate-spin" /></div>;
+        return <div className="z-30 m-40 text-2xl font-semibold text-red-600">Fetching required Group. Please wait...<FaSpinner className=" animate-spin" /></div>;
     }
    
 
@@ -62,9 +62,9 @@ const GroupDetails: React.FC<Props> = (props) => {
                     <div> invitedMem={group?.invitedMembers.map((mem) => <div>{mem}</div>)}</div>
                     <div>participants={group?.participants}</div></div>} */}
 
-            {group&& <div className="flex flex-col items-center text-center">
+            {group&& <div className="flex flex-col items-center ml-12 text-center">
                 
-                <div><img className="w-24 h-24 rounded-full" src={group.group_image_url} alt="" onError={(e: any) => { e.target.onerror = null; e.target.src = "https://www.pngjoy.com/pngm/131/2663889_group-of-people-icon-avatar-group-icon-png.png" }} /></div>
+                <div><img className="w-20 h-20 p-2 mt-2 bg-gray-400 rounded-full" src={group.group_image_url} alt="" onError={(e: any) => { e.target.onerror = null; e.target.src = "https://cdn1.iconfinder.com/data/icons/developer-set-2/512/multiple-512.png" }} /></div>
                 <div className="text-3xl font-bold tracking-wide">{group.name+"("+group.id+")"}</div>
                 <div className="mb-12 text-lg font-extrabold tracking-wider">{group.description}</div>
                 <div className="flex flex-col mb-12 ml-12 space-y-2 text-left">

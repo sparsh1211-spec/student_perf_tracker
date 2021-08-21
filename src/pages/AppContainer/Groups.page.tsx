@@ -1,13 +1,13 @@
 
 import React from "react";
-import { groupsQueryAction } from "../../actions/groups.actions";
-// import { fetchGroups } from "../../middlewares/groups.middleware";
 import { groupsLoadingSelector, groupQuerySelector, groupsSelector } from "../../selectors/groups.selectors";
 import { useAppSelector } from "../../store";
 import { GoSearch } from "react-icons/go"
 import { Link, useHistory } from "react-router-dom";
 import { FaSpinner } from "react-icons/fa";
 import { useDispatch } from "react-redux";
+import { groupsQueryAction } from "../../actions/groups.actions";
+
 
 interface Props {
 
@@ -23,7 +23,7 @@ const Groups: React.FC<Props> = () => {
 
     // useEffect(() => {
     //     fetchGroups({ status: "all-groups", query }).then((groups) => groupActions.queryCompleted(query, groups));
-    // }, [query])//eslint-disable-line
+    // }, [])//eslint-disable-line
 
 
     return (
@@ -47,7 +47,7 @@ const Groups: React.FC<Props> = () => {
                         // groupActions.selectedGroupId(item.id)
                         history.push("/groups/" + item.id)
                     }} className="pl-4 text-white bg-gray-800 cursor-pointer">{item.name}</div>)
-                })}{!loading && groups.length === 0 && "no data"}</div>
+                })}{!loading && groups.length === 0 && "No data, Please search a Group"}</div>
 
         </>
     )

@@ -1,6 +1,5 @@
 
 import React, { useEffect, useState } from "react";
-import { FaSpinner } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
 import { fetchPeoples } from "../../api/peoples";
 import { People } from "../../models/People";
@@ -21,17 +20,6 @@ const Peoples: React.FC<Props> = (props) => {
     useEffect(() => {
         fetchPeoples().then((peoples) => setPeoples(peoples));
     }, [])//eslint-disable-line
-
-    if(!peoples){
-        return (<div className="relative flex flex-col items-center justify-center h-screen bg-black">
-        <FaSpinner className="absolute w-10 h-10 text-white animate-spin " />
-        <FaSpinner className="absolute text-white animate-spin w-14 h-14 " />
-        <FaSpinner className="absolute w-20 h-20 text-white animate-spin" />
-        <FaSpinner className="absolute w-24 h-24 text-white animate-spin" />
-        <FaSpinner className="absolute w-32 h-32 text-white animate-spin" />
-        <FaSpinner className="absolute text-white animate-spin w-36 h-36" />
-       </div>)
-    }
 
     return (
         <div className="bg-gray-300">
