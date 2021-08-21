@@ -31,7 +31,7 @@ const Sidebar: React.FC<Props> = () => {
             <div className="h-screen bg-gray-200 border-r border-gray-300 w-96">
 
                 <div className="">
-                    <Link to="/dashboard"><button className="flex items-center h-10 mt-4 ml-12 space-x-8 text-xs font-bold tracking-widest text-center text-gray-600 bg-gray-100 border rounded-md shadow-md w-60 hover:bg-gray-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="inline m-4 feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>Dashboard<FiChevronDown onClick={isAnimating ? undefined : () => setIsMenuOpen((open) => !open)} className="inline w-4 h-4" /></button></Link>
+                    <Link to="/dashboard"><button className="flex items-center h-10 mt-4 ml-12 space-x-8 text-xs font-bold tracking-widest text-center text-gray-600 bg-gray-100 border rounded-md shadow-md w-60 hover:bg-gray-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="inline m-4 feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>Dashboard<FiChevronDown onClick={isAnimating ? undefined : () => setIsMenuOpen((open) => !open)} className="inline w-4 h-4" /></button></Link>
 
                     <Transition.Root show={isMenuOpen} as={Fragment}
                         beforeLeave={() => setIsAnimating(true)}

@@ -38,7 +38,7 @@ const GroupDetails: React.FC<Props> = (props) => {
     }
    
 
-    if (loading&&error) {
+    if (error) {
         console.log(error);
         return (
             <>
@@ -50,7 +50,6 @@ const GroupDetails: React.FC<Props> = (props) => {
         return <div className="z-30 m-40 text-2xl font-semibold text-red-600">Fetching required Group. Please wait...<FaSpinner className=" animate-spin" /></div>;
     }
    
-
     return (
         <>
             {/* <div className="flex flex-col items-center justify-center font-semibold text-center text-gray-200 bg-gray-500 h-96"> */}

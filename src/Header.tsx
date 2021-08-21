@@ -16,7 +16,7 @@ const Header: React.FC<Props> = (props) => {
     return (
         <>
             <div className="flex items-center h-12 text-center bg-gray-100 border-b border-gray-300">
-                <div className="ml-4 mr-4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+                <div className="ml-4 mr-4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"  className="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
                 <div className="text-lg font-bold">Dashboard</div>
                 <div className="flex justify-end flex-1 mr-2"><button className="w-24 p-2 text-xs font-normal tracking-wider text-left border border-gray-400 rounded-md" onClick={isAnimating ? undefined : () => setIsMenuOpen((open) => !open)}>Settings</button> </div>
                 <Transition.Root show={isMenuOpen} as={Fragment}
