@@ -46,6 +46,7 @@ const Login: React.FC<Props> = () => {
             password: yup.string().required("*Password is a required field!*").min(8, "*Password must be of atleast 8 chars!*"),
         }),
         onSubmit: (data) => {
+            console.log(data)
             login(data).then((u) => {
                 authActions.login(u)
                 history.push("/dashboard");

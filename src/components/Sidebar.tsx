@@ -4,7 +4,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import React, { Fragment, useState } from "react";
 // import { useSelector } from "react-redux";
 import { FiChevronDown } from 'react-icons/fi';
-import { Link, NavLink, useHistory } from "react-router-dom";
+import { Link, NavLink} from "react-router-dom";
 import { logout } from "../api/auth";
 // import { User } from "../models/User";
 // import AppContext from "../App.context";
@@ -26,7 +26,6 @@ const Sidebar: React.FC<Props> = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isAnimating, setIsAnimating] = useState(false);
 
-    const history = useHistory();
     return (
         <>
             <div className="h-screen bg-gray-200 border-r border-gray-300 w-96">
@@ -93,7 +92,7 @@ const Sidebar: React.FC<Props> = () => {
                 </div>
                 <Button className="m-24" theme="dark" onClick={() => {
                     logout();
-                    history.push("/auth/login");
+                    window.location.href="/auth/login";
                 }}>Logout</Button>
 
             </div>

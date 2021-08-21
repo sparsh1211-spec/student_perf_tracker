@@ -40,13 +40,13 @@ const Groups: React.FC<Props> = () => {
                     const itemnumber = index;
                     if (itemnumber % 2 === 0) {
                         return (
-                            <div className="pl-4 text-black bg-gray-400 cursor-pointer "><Link to={"/groups/" + item.id}>{item.name}</Link></div>
+                            <div className="pl-4 text-xl font-bold text-black bg-gray-400 cursor-pointer "><Link to={"/groups/" + item.id}>{item.name}</Link></div>
                         );
                     }
                     return (<div onClick={() => {
                         // groupActions.selectedGroupId(item.id)
                         history.push("/groups/" + item.id)
-                    }} className="pl-4 text-white bg-gray-800 cursor-pointer">{item.name}</div>)
+                    }} className="pl-4 text-xl font-bold text-gray-200 bg-gray-800 cursor-pointer ">{item.name}</div>)
                 })}{!loading && groups.length === 0 && "No data, Please search a Group"}</div>
 
         </>
