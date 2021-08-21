@@ -90,16 +90,17 @@ export const groupReducer: Reducer<GroupState> = (state = initialState, action) 
       const invited=group.invitedMembers as any
       const participants=group.participants as any
       console.log(creators,invited,participants)
-      return { ...state, byId: { ...state.byId, ...action.payload },creators:{...state.creators,[group.id]:creators},participants:{...state.participants,[group.id]:participants},invitedMembers:{...state.invitedMembers,[group.id]:invited} }
+      return { ...state, byId: { ...state.byId, ...action.payload },creators:{...state.creators,[group.id]:creators},participants:{...state.participants,[group.id]:participants},invitedMembers:{...state.invitedMembers,[group.id]:invited},loadingOne:false }
     }
 
     case CURRENT_SELECTED_GROUP_ID:{
-      return {...state,currentSelectedGroupId:action.payload
+      return {...state,currentSelectedGroupId:action.payload,loadingOne:true
       }
     }
     case GROUP_FETCH_ONE_ERROR:
       const { id2, msg } = action.payload;
       return setErrorForOne(state, id2, msg) as GroupState
+
     default:
       return state;
   }

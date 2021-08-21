@@ -1,6 +1,7 @@
 
 import React, { useEffect } from "react";
 import { FaSpinner } from "react-icons/fa";
+import { GrNext,GrPrevious } from "react-icons/gr";
 // import { FaSpinner } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
@@ -29,7 +30,15 @@ const GroupDetails: React.FC<Props> = (props) => {
         dispatch(currentSelectedGroupAction(id));//eslint-disable-next-line
     }, [id])
 
-    if (error) {
+    
+
+    if (!group&&loading) {
+        return <div className="text-red-500">Loading required Group...<FaSpinner className="mt-4 animate-spin" /></div>;
+
+    }
+   
+
+    if (loading&&error) {
         console.log(error);
         return (
             <>
@@ -37,36 +46,46 @@ const GroupDetails: React.FC<Props> = (props) => {
             </>
         )
     }
-
-    if (!group && loading) {
-        return <div className="text-red-500">Loading required Group...<FaSpinner className="mt-4 animate-spin" /></div>
-
+    if(loading){
+        return <div className="z-30 m-40 text-2xl font-semibold text-red-600">LOADING REQUIRED GROUP...<FaSpinner className=" animate-spin" /></div>;
     }
    
+
     return (
         <>
-            <div className="flex flex-col">
+            {/* <div className="flex flex-col items-center justify-center font-semibold text-center text-gray-200 bg-gray-500 h-96"> */}
+            {/* {group &&<div><div><img className="w-24 h-24 rounded-full" src={group.group_image_url} alt="" onError={(e: any) => { e.target.onerror = null; e.target.src = "https://www.pngjoy.com/pngm/131/2663889_group-of-people-icon-avatar-group-icon-png.png" }} /></div>
+                    <div>{group.name}</div>
+                    <div>Id={group.id}</div>
+                    <div>creator={group.creator?.first_name + " " + group.creator?.middle_name + " " + group.creator?.last_name}</div>
+                    <div>description={group?.description}</div>
+                    <div> invitedMem={group?.invitedMembers.map((mem) => <div>{mem}</div>)}</div>
+                    <div>participants={group?.participants}</div></div>} */}
 
-                {group && <div> {group.name}
-                    Id={group.id}
-                    creator={group.creator?.first_name}
-                    
-                    description={group.description}
-                    invitedMem={group.invitedMembers}
-
-                    <img className="w-12 h-12 m-4 rounded-full" src={group.group_image_url} alt="" onError={(e: any) => { e.target.onerror = null; e.target.src = "https://www.pngjoy.com/pngm/131/2663889_group-of-people-icon-avatar-group-icon-png.png" }} /></div>}
-                <div className="flex space-x-8">
-
-                    <div><Link to={"/groups/" + (id - 1)} className="text-red-600 underline">Prev</Link></div>
-                    <div><Link to={"/groups/" + (id + 1)} className="text-green-600 underline">Next</Link></div>
+            {group&& <div className="flex flex-col items-center text-center">
+                
+                <div><img className="w-24 h-24 rounded-full" src={group.group_image_url} alt="" onError={(e: any) => { e.target.onerror = null; e.target.src = "https://www.pngjoy.com/pngm/131/2663889_group-of-people-icon-avatar-group-icon-png.png" }} /></div>
+                <div className="text-3xl font-bold tracking-wide">{group.name+"("+group.id+")"}</div>
+                <div className="mb-12 text-lg font-extrabold tracking-wider">{group.description}</div>
+                <div className="flex flex-col mb-12 ml-12 space-y-2 text-left">
+                <div className="text-lg font-extrabold tracking-wide"><span className="underline">JOIN-CODE</span> : {group.join_code}</div>
+                <div className="text-lg font-extrabold tracking-wide"><span className="underline">CREATED-AT</span> : {group.created_at}</div>
+                <div className="text-lg font-extrabold tracking-wide"><span className="underline">CHAT-COUNT</span> : {group.chatCount}</div>
+                <div className="text-lg font-extrabold tracking-wide"><span className="underline">CREATOR</span> : {group.creator?.first_name + " " + group.creator?.middle_name + " " + group.creator?.last_name}</div>
+                <div className="text-lg font-extrabold tracking-wide"><span className="underline">INVITED-MEMBERS</span> : {group?.invitedMembers.map((M) => <div>{M}</div>)}</div>
+                <div className="text-lg font-extrabold tracking-wide"><span className="underline">PARTICIPANTS</span> : {group?.participants.map((P) => <div>{P}</div>)}</div>
                 </div>
-                <div><Link to="/groups" className="text-blue-600 underline">Back to Groups page</Link></div>
-                <div className="p-2 m-4 bg-white rounded-lg ">
-                </div>
+                <div className="flex mb-2 space-x-8 text-3xl">
+                <div><Link className="" to={"/groups/" + (id - 1)}><GrPrevious></GrPrevious></Link></div>
+                <div><Link to={"/groups/" + (id + 1)}><GrNext></GrNext></Link></div>
             </div>
+            <div><Link to="/groups" className="text-3xl font-semibold text-indigo-700 underline">Back to Groups page</Link></div> 
+            </div>
+            }
+
+          
         </>
     );
-
 };
 GroupDetails.defaultProps = {
 }
